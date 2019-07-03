@@ -3,11 +3,21 @@
 
 #include "pch.h"
 #include <iostream>
+#include <string>
+#include "Startup.h"
+
+
 using namespace std;
+using namespace MoreJeeAPI;
 
 int main()
 {
+	wstring url = L"http://api.server";
 
+	auto ins = Startup::GetInstance();
+	ins.Init(url);
+
+	wcout << ins.GetServer() << endl;
 
 	int g = getchar();
 }
