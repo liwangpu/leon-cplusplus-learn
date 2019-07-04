@@ -27,4 +27,7 @@
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="persons.json" />
+  </ItemGroup>
 </Project>
