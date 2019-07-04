@@ -1,4 +1,17 @@
 {
-  "name": "Leon",
-  "Age": 18
+  "application": "Leon",
+  "reputons": [
+    {
+      "assertion": "s2",
+      "rated": "s3",
+      "rater": "s1",
+      "rating": 2.3
+    },
+    {
+      "assertion": "s2",
+      "rated": "s3",
+      "rater": "s1",
+      "rating": 5.0
+    }
+  ]
 }

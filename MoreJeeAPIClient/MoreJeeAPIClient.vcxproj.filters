@@ -21,7 +21,10 @@
     <ClInclude Include="targetver.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Startup.h">
+    <ClInclude Include="include\Startup.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FileServer.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -33,6 +36,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Startup.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FileServer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
