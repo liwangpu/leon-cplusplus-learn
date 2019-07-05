@@ -147,15 +147,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="FileServer.h" />
-    <ClInclude Include="include\Startup.h" />
+    <ClInclude Include="APIServer.h" />
+    <ClInclude Include="include\APIStartup.h" />
+    <ClInclude Include="include\OSS\FileServer.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="APIServer.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="APIStartup.cpp" />
     <ClCompile Include="FileServer.cpp" />
-    <ClCompile Include="Startup.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
