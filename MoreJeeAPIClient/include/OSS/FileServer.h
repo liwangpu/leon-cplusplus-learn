@@ -1,7 +1,9 @@
 #pragma once
 
+#include <map>
 #include "../APIServer.h"
 #include "../APIStartup.h"
+#include "../CurlHelper.h"
 
 #ifdef MOREJEEAPICLIENT_EXPORTS
 #define MOREJEEAPICLIENT_API __declspec(dllexport)
@@ -13,10 +15,19 @@ namespace MoreJeeAPI
 {
 	namespace OSS
 	{
+		using namespace std;
+
 		struct FileListDTO
 		{
 			int age;
 		};
+
+		struct FileQueryDTO
+		{
+			int total = 0;
+		};
+
+		JSONCONS_MEMBER_TRAITS_DECL(FileQueryDTO, total)
 
 		class MOREJEEAPICLIENT_API FileServer :protected APIServer
 		{

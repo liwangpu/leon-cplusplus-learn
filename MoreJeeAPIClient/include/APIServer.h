@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 #include <string>
+#include <jsoncons/json.hpp>
+
 #ifdef MOREJEEAPICLIENT_EXPORTS
 #define MOREJEEAPICLIENT_API __declspec(dllexport)
 #else
@@ -10,6 +12,7 @@
 namespace MoreJeeAPI
 {
 	using namespace std;
+	using namespace jsoncons;
 
 	struct PagingQuery
 	{
@@ -24,7 +27,7 @@ namespace MoreJeeAPI
 	};
 
 
-
+	//JSONCONS_MEMBER_TRAITS_DECL(PagingQueryDTO<T>, total);
 	class MOREJEEAPICLIENT_API APIServer
 	{
 	protected:

@@ -24,7 +24,13 @@
     <ClInclude Include="include\APIServer.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="source\JsonconsHelper.h">
+    <ClInclude Include="include\CurlHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\StringHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\JsonconsHelper.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -42,6 +48,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="source\OSS\FileServer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CurlHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="source\StringHelper.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -7,10 +7,11 @@
 #include <string>
 #include <locale>
 #include <vector>
+#include <map>
 //#include <cassert>
 //#include <curl/curl.h>
 //#include "Startup.h"
-//#include <jsoncons/json.hpp>
+#include <jsoncons/json.hpp>
 
 #include "APIStartup.h"
 #include "./OSS/FileServer.h"
@@ -44,7 +45,7 @@ using namespace MoreJeeAPI::OSS;
 //
 //};
 
-//
+
 //class Person
 //{
 //public:
@@ -144,8 +145,8 @@ int main()
 	wcout.imbue(locale("chs"));
 
 
-	//Person p;
-	//Person *pt = &p;
+	////Person p;
+	////Person *pt = &p;
 
 
 	wstring url = L"http://192.168.99.100:9503/";
@@ -163,6 +164,26 @@ int main()
 
 
 
+	//map<string, int> myMsg;
+
+	//myMsg["age"] = 18;
+	//myMsg["sum"] = 100;
+
+	//auto a = myMsg.find("age");
+
+	//for (auto it = myMsg.begin(); it != myMsg.end(); it++)
+	//{
+	//	wcout << it. << endl;
+	//}
+
+
+
+	//for (auto const& p : myMsg)
+	//{
+	//	std::cout << p.first << ' ' << p.second << '\n';
+	//}
+
+	//wcout << myMsg.find(1) << endl;
 
 
 

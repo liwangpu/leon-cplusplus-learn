@@ -29,8 +29,8 @@ namespace MoreJeeAPI
 		cusread_from(basic_json<CharT>(), reader, objOut);
 	}
 
-	wstring s2ws(const string& str);
+	//wstring s2ws(const string& str);
 
-	string ws2s(const wstring& wstr);
+	//string ws2s(const wstring& wstr);
 
 }

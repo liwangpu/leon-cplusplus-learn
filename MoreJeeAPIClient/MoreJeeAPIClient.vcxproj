@@ -149,15 +149,19 @@
   <ItemGroup>
     <ClInclude Include="include\APIServer.h" />
     <ClInclude Include="include\APIStartup.h" />
+    <ClInclude Include="include\CurlHelper.h" />
+    <ClInclude Include="include\JsonconsHelper.h" />
     <ClInclude Include="include\OSS\FileServer.h" />
-    <ClInclude Include="source\JsonconsHelper.h" />
+    <ClInclude Include="include\StringHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="source\APIServer.cpp" />
     <ClCompile Include="source\APIStartup.cpp" />
+    <ClCompile Include="source\CurlHelper.cpp" />
     <ClCompile Include="source\OSS\FileServer.cpp" />
     <ClCompile Include="source\JsonconsHelper.cpp" />
+    <ClCompile Include="source\StringHelper.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
