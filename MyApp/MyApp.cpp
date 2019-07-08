@@ -10,14 +10,16 @@
 //#include <cassert>
 //#include <curl/curl.h>
 //#include "Startup.h"
-#include <jsoncons/json.hpp>
+//#include <jsoncons/json.hpp>
 
 #include "APIStartup.h"
+#include "./OSS/FileServer.h"
 //#include "OSS/FileServer.h"
 
 using namespace std;
 using namespace MoreJeeAPI;
-using namespace jsoncons;
+using namespace MoreJeeAPI::OSS;
+//using namespace jsoncons;
 
 
 //class Person
@@ -42,162 +44,189 @@ using namespace jsoncons;
 //
 //};
 
+//
+//class Person
+//{
+//public:
+//	Person() : age(0) {}
+//	Person(const std::string& name, const std::string& surname,
+//		const std::string& ssn, unsigned int age)
+//		: name(name), surname(surname), ssn(ssn), age(age) { }
+//
+//private:
+//	// Make json_type_traits specializations friends to give accesses to private members
+//	JSONCONS_TYPE_TRAITS_FRIEND;
+//	std::string name;
+//	std::string surname;
+//	std::string ssn;
+//	unsigned int age;
+//};
+//
+//
+//
+//// Declare the traits. Specify which data members need to be serialized.
+//JSONCONS_MEMBER_TRAITS_DECL(Person, name, surname, ssn, age)
+//
+//
+//class MyErrorHandler : public parse_error_handler
+//{
+//public:
+//	~MyErrorHandler() {}
+//
+//protected:
+//	virtual bool do_error(std::error_code,
+//		const ser_context& context) noexcept
+//	{
+//		return true;
+//	}
+//
+//	virtual void do_fatal_error(std::error_code,
+//		const ser_context&) noexcept
+//	{
+//	}
+//};
+//
+//template <class T, class CharT, class Json>
+//void myread_from(const Json& j, basic_staj_reader<CharT>& reader, T& val)
+//{
+//	std::error_code ec;
+//	read_from(j, reader, val, ec);
+//	if (ec)
+//	{
+//		//throw ser_error(ec, reader.context().line(), reader.context().column());
+//	}
+//}
+//
+//template <class T, class CharT>
+//void mydecode_json(const std::basic_string<CharT>& s, T& objOut,
+//	const basic_json_decode_options<CharT>& options = basic_json_options<CharT>::default_options())
+//{
+//	basic_json_pull_reader<CharT> reader(s, options);
+//	myread_from(basic_json<CharT>(), reader, objOut);
+//}
+//
+//
+
+
+
+
+
+
+//
+//
+//struct PagingQuery
+//{
+//	int page;
+//	int pageSize;
+//};
+//
+//template <class T> struct PagingQueryDTO
+//{
+//	int _total;
+//	int& total = _total;
+//	vector<T> data;
+//};
+//
+
+
+
 
 class Person
 {
 public:
-	Person() : age(0) {}
-	Person(const std::string& name, const std::string& surname,
-		const std::string& ssn, unsigned int age)
-		: name(name), surname(surname), ssn(ssn), age(age) { }
-
-private:
-	// Make json_type_traits specializations friends to give accesses to private members
-	JSONCONS_TYPE_TRAITS_FRIEND;
-	std::string name;
-	std::string surname;
-	std::string ssn;
-	unsigned int age;
+	int Age;
 };
 
-
-
-// Declare the traits. Specify which data members need to be serialized.
-JSONCONS_MEMBER_TRAITS_DECL(Person, name, surname, ssn, age)
-
-
-class MyErrorHandler : public parse_error_handler
-{
-public:
-	~MyErrorHandler() {}
-
-protected:
-	virtual bool do_error(std::error_code,
-		const ser_context& context) noexcept
-	{
-		return true;
-	}
-
-	virtual void do_fatal_error(std::error_code,
-		const ser_context&) noexcept
-	{
-	}
-};
-
-template <class T, class CharT, class Json>
-void myread_from(const Json& j, basic_staj_reader<CharT>& reader, T& val)
-{
-	std::error_code ec;
-	read_from(j, reader, val, ec);
-	if (ec)
-	{
-		//throw ser_error(ec, reader.context().line(), reader.context().column());
-	}
-}
-
-template <class T, class CharT>
-void mydecode_json(const std::basic_string<CharT>& s, T& objOut,
-	const basic_json_decode_options<CharT>& options = basic_json_options<CharT>::default_options())
-{
-	basic_json_pull_reader<CharT> reader(s, options);
-	myread_from(basic_json<CharT>(), reader, objOut);
-}
 
 
 int main()
 {
 	wcout.imbue(locale("chs"));
 
-	//wstring url = L"http://192.168.99.100:9503/";
-	//Startup & startup = Startup::Instance();
-	//startup.Init(url);
+
+	//Person p;
+	//Person *pt = &p;
 
 
-	ifstream fs;
-	fs.open("persons.json");
-
-	string str;
-	char _c;
-	while (fs.get(_c))
-		str += _c;
-	cout << str << endl;
-
-	Person p;
-	mydecode_json<Person>(str, p);
+	wstring url = L"http://192.168.99.100:9503/";
+	Startup & startup = Startup::Instance();
+	startup.Init(url);
 
 
-
-	//MyErrorHandler myhandler;
-	//json_decoder<json> decoder;
-	//basic_json_reader<char, string_source<char>> reader(str, myhandler);
-	//reader.read();
-	//auto decodedstr = decoder.get_result();
-
-	//std::string input = R"({"field1":ru})";
-	//std::istringstream is(input);
-
-	//json_decoder<Person> decoder;
-	//json_reader reader(is, decoder);
+	OSS::FileServer & fileSrv = FileServer::Instance();
 
 
-	//while (!reader.eof())
-	//{
-	//	reader.read_next();
-	//	if (!reader.eof())
-	//	{
-	//		json val = decoder.get_result();
-	//		std::cout << val << std::endl;
-	//	}
-	//}
+	PagingQuery prm{ 1,100 };
 
-	//std::error_code ec;
-	//reader.read(ec);
-
-	//if (!ec)
-	//{
-	//	json j = decoder.get_result();
-	//}
-	//else
-	//{
-	//	std::cerr << ec.message()
-	//		<< " at line " << reader.line()
-	//		<< " and column " << reader.column() << std::endl;
-	//}
-
-	auto person = jsoncons::decode_json<Person>(str);
-
-
-	//json j = json::parse(str);
-	//auto sv = j.as<Person>();
+	PagingQueryDTO<FileListDTO> result;
+	fileSrv.Query(prm, result);
 
 
 
-	////wchar_t c = 'a';
-	//wchar_t str[3] = { 'a','b','c' };
 
-	//wchar_t* cp = str;
 
-	////for (int i = 0; i < 3; i++)
-	////{
-	////	cout << cp[i] << endl;
-	////}
 
+
+
+
+	//wstring server = L"http://192.168.99.100:9503/";
+
+	//wchar_t * _Server1 = nullptr;
+	//wchar_t * _Server2 = nullptr;
+
+	//_Server1 = new wchar_t[server.size() + 1];
+	//wcscpy_s(_Server1, server.size() + 1, server.c_str());
+
+	//_Server2 = new wchar_t[server.size() + 1];
+	//wcscpy_s(_Server2, server.size() + 1, server.c_str());
+
+
+	//bool aa = *_Server1 == *_Server2;
+
+
+
+
+
+
+	//wcout << _Server1== _Server2 << endl;
+
+
+	//Book book;
+
+	//book.name = "水浒传";
+	//book.price = 18;
+
+
+
+	//PagingQueryDTO<PagingQuery> res;
+
+	//vector<PagingQuery> list;
+
+	//PagingQuery p1;
+	//p1.page = 12;
+	//p1.pageSize = 100;
+
+	//list.push_back(p1);
+
+
+	//wcout << startup.Server() << endl;
+
+
+
+	//ifstream fs;
+	//fs.open("persons.json");
+
+	//string str;
+	//char _c;
+	//while (fs.get(_c))
+	//	str += _c;
 	//cout << str << endl;
 
-
-	//wchar_t  arr[] = L"好國的";
-	//wchar_t *str = arr;
-
-	//
-	//wcout << str << endl;
-
-
-	//funa();
+	//Person p;
+	//mydecode_json<Person>(str, p);
 
 
 
-
-	//cout << "asdsf" << endl;
 
 
 	wcout << "finished!" << endl;

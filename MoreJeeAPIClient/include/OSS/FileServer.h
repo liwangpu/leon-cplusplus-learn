@@ -1,25 +1,30 @@
 #pragma once
 
-#ifdef MOREJEEAPISERVER_EXPORTS
-#define MOREJEEAPISERVER_API __declspec(dllexport)
+#include "../APIServer.h"
+#include "../APIStartup.h"
+
+#ifdef MOREJEEAPICLIENT_EXPORTS
+#define MOREJEEAPICLIENT_API __declspec(dllexport)
 #else
-#define MOREJEEAPISERVER_API __declspec(dllimport)
+#define MOREJEEAPICLIENT_API __declspec(dllimport)
 #endif
 
 namespace MoreJeeAPI
 {
 	namespace OSS
 	{
-		class MOREJEEAPISERVER_API FileServer
+		struct FileListDTO
+		{
+			int age;
+		};
+
+		class MOREJEEAPICLIENT_API FileServer :protected APIServer
 		{
 		private:
 			FileServer();
 		public:
-			static 	FileServer & Instance()
-			{
-				static FileServer _Instance;
-				return _Instance;
-			}
+			static FileServer& Instance();//获取启动器实例
+			void Query(const PagingQuery& query, PagingQueryDTO<FileListDTO> & result);
 		};
 	}
 }

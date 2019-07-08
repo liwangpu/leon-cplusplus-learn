@@ -84,7 +84,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
@@ -147,23 +147,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="APIServer.h" />
+    <ClInclude Include="include\APIServer.h" />
     <ClInclude Include="include\APIStartup.h" />
     <ClInclude Include="include\OSS\FileServer.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
+    <ClInclude Include="source\JsonconsHelper.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="APIServer.cpp" />
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="APIStartup.cpp" />
-    <ClCompile Include="FileServer.cpp" />
-    <ClCompile Include="stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
+    <ClCompile Include="source\APIServer.cpp" />
+    <ClCompile Include="source\APIStartup.cpp" />
+    <ClCompile Include="source\OSS\FileServer.cpp" />
+    <ClCompile Include="source\JsonconsHelper.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

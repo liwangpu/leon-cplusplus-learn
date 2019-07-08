@@ -15,36 +15,33 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="include\OSS\FileServer.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="include\APIStartup.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="APIServer.h">
+    <ClInclude Include="include\APIServer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="source\JsonconsHelper.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="dllmain.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="APIStartup.cpp">
+    <ClCompile Include="source\APIStartup.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="FileServer.cpp">
+    <ClCompile Include="source\APIServer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="APIServer.cpp">
+    <ClCompile Include="source\JsonconsHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="source\OSS\FileServer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
