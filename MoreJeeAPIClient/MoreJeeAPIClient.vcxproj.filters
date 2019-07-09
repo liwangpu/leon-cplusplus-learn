@@ -30,9 +30,6 @@
     <ClInclude Include="include\StringHelper.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="include\JsonconsHelper.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -42,9 +39,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="source\APIServer.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="source\JsonconsHelper.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="source\OSS\FileServer.cpp">

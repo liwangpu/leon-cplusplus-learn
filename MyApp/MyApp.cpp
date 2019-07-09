@@ -8,10 +8,17 @@
 //#include <locale>
 #include <vector>
 #include <map>
+#include <vector>
+#include <cstdarg>
+#include <cstring>
+
+
+#include <sstream>
+
 //#include <cassert>
 //#include <curl/curl.h>
 //#include "Startup.h"
-#include <jsoncons/json.hpp>
+//#include <jsoncons/json.hpp>
 
 #include "APIStartup.h"
 #include "OSS/FileServer.h"
@@ -20,144 +27,92 @@
 using namespace std;
 using namespace MoreJeeAPI;
 using namespace MoreJeeAPI::OSS;
-using namespace jsoncons;
+//using namespace jsoncons;
 
 
-
-template <class T, class CharT, class Json>
-void myread_from(const Json& j, basic_staj_reader<CharT>& reader, T& val)
+struct MyQuery
 {
-	std::error_code ec;
-	read_from(j, reader, val, ec);
-	if (ec)
-	{
-		//throw ser_error(ec, reader.context().line(), reader.context().column());
-	}
-}
+	short page;
+	short pageSize;
+	wstring search;
 
-template <class T, class CharT>
-void mydecode_json(const std::basic_string<CharT>& s, T& objOut,
-	const basic_json_decode_options<CharT>& options = basic_json_options<CharT>::default_options())
-{
-	basic_json_pull_reader<CharT> reader(s, options);
-	myread_from(basic_json<CharT>(), reader, objOut);
-}
-
-
-
-struct User
-{
-	int total;
+	//stream& operator<< (stream& s)
+	//{
+	//	s << page << pageSize << search;
+	//	return s;
+	//}
 };
 
-JSONCONS_MEMBER_TRAITS_DECL(User, total);
-
-
-struct PagingQuery
-{
-	int page;
-	int pageSize;
-	wstring name;
-
-	PagingQuery()
-	{
-
-	}
-
-	PagingQuery(int p, int ps, const wstring& n)
-	{
-		page = p;
-		pageSize = ps;
-		name = n;
-
-	}
-};
-
-JSONCONS_MEMBER_TRAITS_DECL(PagingQuery, page, pageSize, name)
-
-//struct Account
-//{
-//	Account() {}
-//	Account(const string& name, int age) :name(name), age(age)
-//	{}
-//	string name;
-//	int age;
-//};
 //
-//
-//template <class T> struct PagingQueryDTO
+//string format(const std::string& format, ...)
 //{
-//	int total;
-//	vector<T> data;
-//};
-
-
-//JSONCONS_MEMBER_TRAITS_DECL(PagingQueryDTO<Account>, total, data)
-
-//struct PagingQuery
-//{
-//	int page;
-//	int pageSize;
-//	PagingQuery() 
-//	{
-//	
-//	}
-//};
-//
-//
-//JSONCONS_MEMBER_TRAITS_DECL(PagingQuery, Page, PageSize)
-
-
-//template <class T> struct PagingQueryDTO
-//{
-//	int _total;
-//	vector<T> data;
-//};
-
-
-
-
-
-
+//	va_list args;
+//	va_start(args, format);
+//	size_t len = vsnprintf(NULL, 0, format.c_str(), args);
+//	va_end(args);
+//	std::vector<char> vec(len + 1);
+//	va_start(args, format.c_str());
+//	std::vsnprintf(&vec[0], len + 1, format.c_str(), args);
+//	va_end(args);
+//	return &vec[0];
+//}
 
 int main()
 {
-	//wcout.imbue(locale("chs"));
+	wcout.imbue(locale("chs"));
+	//MyQuery q;
+	//q.page = 1;
 
-	//wstring wstr = L"你好";
-	//string str;
+	//wstring body = encode_json<MyQuery>(q);
+	//string bodystr = wstr2str(body);
 
-	//ws2s(wstr,str);
+	////char buff[512];
+	////string key = "apple";
+	////sprintf(buff, "search=%s&page=%d&pageSize=%d", key.c_str(), 2, 10);
+	////string result = buff;
 
+	//stream s;
+	//s << q;
+	//wchar_t wbuff[512];
+	//wstring wkey = L"apple";
+	//swprintf(wbuff, L"search=%s&page=%p&pageSize=%s", wkey.c_str(), 2, 10);
 
-	//wstring str = L"{\"total\":1,\"page\":1,\"pageSize\":100,\"name\":\"习总名\"}";
-
-	//PagingQuery q = decode_json<PagingQuery,wchar_t>(str);
-
-
-
-	//int g = getchar();
-
-
-
-
-	wstring url = L"http://192.168.99.100:9503/";
-	Startup & startup = Startup::Instance();
-	startup.Init(url);
+	//wstring url = L"http://192.168.99.100:9503/";
+	//Startup & startup = Startup::Instance();
+	//startup.Init(url);
 
 
-	OSS::FileServer & fileSrv = FileServer::Instance();
+	//OSS::FileServer & fileSrv = FileServer::Instance();
 
-	FileQuery prm{ 1,100 };
+	//FileQuery prm{ 1,100 };
 
-	FileQueryDTO result;
-	fileSrv.Query(prm, result);
+	//FileQueryDTO result;
+	//fileSrv.Query(prm, result);
 
 
 	//result.data[0].test();
 
 
+
+
+
+	//char str[] = "%s => %d";
+	//std::cout << format("search=%s", "apples") << endl;
+
+
+
+	wstring search = L"小明";
+
+	wostringstream out;
+
+	out << "search=" << search;
+
+	wcout << out.str() << endl;
+
+
+
 	int a = 1;
+	int g = getchar();
 
 	//map<string, int> myMsg;
 

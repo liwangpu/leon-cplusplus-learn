@@ -1,8 +1,6 @@
 #pragma once
-#include <string>
 #include <map>
-#include "curl/curl.h"
-#include "./StringHelper.h"
+#include <string>
 
 namespace MoreJeeAPI
 {

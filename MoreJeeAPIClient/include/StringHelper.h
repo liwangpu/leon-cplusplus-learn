@@ -1,7 +1,5 @@
 #pragma once
 #include <string>
-#include <locale>
-#include <codecvt>
 
 namespace MoreJeeAPI
 {

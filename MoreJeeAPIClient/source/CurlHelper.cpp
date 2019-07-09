@@ -1,4 +1,6 @@
+#include "curl/curl.h"
 #include "../include/CurlHelper.h"
+#include "../include/StringHelper.h"
 
 
 namespace MoreJeeAPI

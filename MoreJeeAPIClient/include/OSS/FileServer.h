@@ -1,13 +1,5 @@
 #pragma once
-
-#include <map>
-#include <vector>
-#include "../thirdparty/jsoncons/json.hpp"
 #include "../APIServer.h"
-#include "../APIStartup.h"
-#include "../CurlHelper.h"
-#include "../../include/StringHelper.h"
-#include "../../include/JsonconsHelper.h"
 
 #ifdef MOREJEEAPICLIENT_EXPORTS
 #define MOREJEEAPICLIENT_API __declspec(dllexport)
@@ -15,36 +7,31 @@
 #define MOREJEEAPICLIENT_API __declspec(dllimport)
 #endif
 
-using namespace std;
-using namespace jsoncons;
-
-struct FileListDTO
-{
-	wstring id;
-	wstring name;
-};
-
-JSONCONS_MEMBER_TRAITS_DECL(FileListDTO, id, name);
-
-struct MOREJEEAPICLIENT_API FileQueryDTO
-{
-	int total;
-	vector<FileListDTO> data;
-};
-
-JSONCONS_MEMBER_TRAITS_DECL(FileQueryDTO, total, data);
 
 namespace MoreJeeAPI
 {
 	namespace OSS
 	{
-		/*using namespace std;*/
-		/*using namespace jsoncons;*/
+		using namespace std;
 
+		//分页查询参数
 		struct FileQuery
 		{
 			short page;
 			short pageSize;
+			wstring search;
+		};
+
+		struct FileListDTO
+		{
+			wstring id;
+			wstring name;
+		};
+
+		struct FileQueryDTO
+		{
+			int total;
+			vector<FileListDTO> data;
 		};
 
 
@@ -61,3 +48,4 @@ namespace MoreJeeAPI
 		};
 	}
 }
+
