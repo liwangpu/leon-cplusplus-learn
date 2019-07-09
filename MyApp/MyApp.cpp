@@ -5,7 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <locale>
+//#include <locale>
 #include <vector>
 #include <map>
 //#include <cassert>
@@ -14,139 +14,131 @@
 #include <jsoncons/json.hpp>
 
 #include "APIStartup.h"
-#include "./OSS/FileServer.h"
-//#include "OSS/FileServer.h"
+#include "OSS/FileServer.h"
+#include "StringHelper.h"
 
 using namespace std;
 using namespace MoreJeeAPI;
 using namespace MoreJeeAPI::OSS;
-//using namespace jsoncons;
+using namespace jsoncons;
 
 
-//class Person
+
+template <class T, class CharT, class Json>
+void myread_from(const Json& j, basic_staj_reader<CharT>& reader, T& val)
+{
+	std::error_code ec;
+	read_from(j, reader, val, ec);
+	if (ec)
+	{
+		//throw ser_error(ec, reader.context().line(), reader.context().column());
+	}
+}
+
+template <class T, class CharT>
+void mydecode_json(const std::basic_string<CharT>& s, T& objOut,
+	const basic_json_decode_options<CharT>& options = basic_json_options<CharT>::default_options())
+{
+	basic_json_pull_reader<CharT> reader(s, options);
+	myread_from(basic_json<CharT>(), reader, objOut);
+}
+
+
+
+struct User
+{
+	int total;
+};
+
+JSONCONS_MEMBER_TRAITS_DECL(User, total);
+
+
+struct PagingQuery
+{
+	int page;
+	int pageSize;
+	wstring name;
+
+	PagingQuery()
+	{
+
+	}
+
+	PagingQuery(int p, int ps, const wstring& n)
+	{
+		page = p;
+		pageSize = ps;
+		name = n;
+
+	}
+};
+
+JSONCONS_MEMBER_TRAITS_DECL(PagingQuery, page, pageSize, name)
+
+//struct Account
 //{
-//private:
-//	string _Name;
-//	JSONCONS_TYPE_TRAITS_FRIEND;
-//public:
-//	Person() {}
-//	Person(const string &name) :_Name(name) {}
-//	const string & Name() { return _Name; }
-//	// Make json_type_traits specializations friends to give accesses to private members
-//
+//	Account() {}
+//	Account(const string& name, int age) :name(name), age(age)
+//	{}
+//	string name;
+//	int age;
 //};
 //
 //
-//JSONCONS_MEMBER_TRAITS_DECL(Person, Name)
-//
-//
-//struct User
+//template <class T> struct PagingQueryDTO
 //{
-//
+//	int total;
+//	vector<T> data;
 //};
 
 
-//class Person
-//{
-//public:
-//	Person() : age(0) {}
-//	Person(const std::string& name, const std::string& surname,
-//		const std::string& ssn, unsigned int age)
-//		: name(name), surname(surname), ssn(ssn), age(age) { }
-//
-//private:
-//	// Make json_type_traits specializations friends to give accesses to private members
-//	JSONCONS_TYPE_TRAITS_FRIEND;
-//	std::string name;
-//	std::string surname;
-//	std::string ssn;
-//	unsigned int age;
-//};
-//
-//
-//
-//// Declare the traits. Specify which data members need to be serialized.
-//JSONCONS_MEMBER_TRAITS_DECL(Person, name, surname, ssn, age)
-//
-//
-//class MyErrorHandler : public parse_error_handler
-//{
-//public:
-//	~MyErrorHandler() {}
-//
-//protected:
-//	virtual bool do_error(std::error_code,
-//		const ser_context& context) noexcept
-//	{
-//		return true;
-//	}
-//
-//	virtual void do_fatal_error(std::error_code,
-//		const ser_context&) noexcept
-//	{
-//	}
-//};
-//
-//template <class T, class CharT, class Json>
-//void myread_from(const Json& j, basic_staj_reader<CharT>& reader, T& val)
-//{
-//	std::error_code ec;
-//	read_from(j, reader, val, ec);
-//	if (ec)
-//	{
-//		//throw ser_error(ec, reader.context().line(), reader.context().column());
-//	}
-//}
-//
-//template <class T, class CharT>
-//void mydecode_json(const std::basic_string<CharT>& s, T& objOut,
-//	const basic_json_decode_options<CharT>& options = basic_json_options<CharT>::default_options())
-//{
-//	basic_json_pull_reader<CharT> reader(s, options);
-//	myread_from(basic_json<CharT>(), reader, objOut);
-//}
-//
-//
+//JSONCONS_MEMBER_TRAITS_DECL(PagingQueryDTO<Account>, total, data)
 
-
-
-
-
-
-//
-//
 //struct PagingQuery
 //{
 //	int page;
 //	int pageSize;
+//	PagingQuery() 
+//	{
+//	
+//	}
 //};
 //
+//
+//JSONCONS_MEMBER_TRAITS_DECL(PagingQuery, Page, PageSize)
+
+
 //template <class T> struct PagingQueryDTO
 //{
 //	int _total;
-//	int& total = _total;
 //	vector<T> data;
 //};
-//
 
 
 
 
-class Person
-{
-public:
-	int Age;
-};
 
 
 
 int main()
 {
-	wcout.imbue(locale("chs"));
+	//wcout.imbue(locale("chs"));
+
+	//wstring wstr = L"你好";
+	//string str;
+
+	//ws2s(wstr,str);
 
 
-	////Person p;
-	////Person *pt = &p;
+	//wstring str = L"{\"total\":1,\"page\":1,\"pageSize\":100,\"name\":\"习总名\"}";
+
+	//PagingQuery q = decode_json<PagingQuery,wchar_t>(str);
+
+
+
+	//int g = getchar();
+
+
 
 
 	wstring url = L"http://192.168.99.100:9503/";
@@ -156,13 +148,16 @@ int main()
 
 	OSS::FileServer & fileSrv = FileServer::Instance();
 
+	FileQuery prm{ 1,100 };
 
-	PagingQuery prm{ 1,100 };
-
-	PagingQueryDTO<FileListDTO> result;
+	FileQueryDTO result;
 	fileSrv.Query(prm, result);
 
 
+	//result.data[0].test();
+
+
+	int a = 1;
 
 	//map<string, int> myMsg;
 
@@ -250,7 +245,7 @@ int main()
 
 
 
-	wcout << "finished!" << endl;
-	int g = getchar();
+	//wcout << "finished!" << endl;
+	/*int g = getchar();*/
 }
 

@@ -22,6 +22,7 @@ namespace MoreJeeAPI
 		}
 		_Server = new wchar_t[server.size() + 1];
 		wcscpy_s(_Server, server.size() + 1, server.c_str());
+		setlocale(LC_ALL, "");
 	}
 
 

@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
-#include <jsoncons/json.hpp>
+//#include <jsoncons/json.hpp>
 
 #ifdef MOREJEEAPICLIENT_EXPORTS
 #define MOREJEEAPICLIENT_API __declspec(dllexport)
@@ -12,22 +12,21 @@
 namespace MoreJeeAPI
 {
 	using namespace std;
-	using namespace jsoncons;
+	//using namespace jsoncons;
 
-	struct PagingQuery
-	{
-		int page = 1;
-		int pageSize = 20;
-	};
+	//struct PagingQuery
+	//{
+	//	int page = 1;
+	//	int pageSize = 20;
+	//};
 
-	template <class T> struct PagingQueryDTO
-	{
-		int total = 0;
-		vector<T> data;
-	};
+	//template <class T> struct PagingQueryDTO
+	//{
+	//	int total = 0;
+	//	//vector<T> data;
+	//};
 
 
-	//JSONCONS_MEMBER_TRAITS_DECL(PagingQueryDTO<T>, total);
 	class MOREJEEAPICLIENT_API APIServer
 	{
 	protected:

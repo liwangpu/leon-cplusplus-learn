@@ -38,6 +38,13 @@ namespace MoreJeeAPI
 		return str.c_str();
 	}
 
+	const wchar_t * s2wcptr(const string & str)
+	{
+		wstring wstr;
+		s2ws(str, wstr);
+		return wstr.c_str();
+	}
+
 
 
 	//char * ws2cptr(const wstring & wstr)

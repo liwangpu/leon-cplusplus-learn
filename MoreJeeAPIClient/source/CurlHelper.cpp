@@ -11,7 +11,7 @@ namespace MoreJeeAPI
 	}
 
 
-	void HttpGet(const wstring& uri, const map<string, string>& header, string& response)
+	void HttpGet(const wstring& uri, const map<string, string>& header, wstring& response)
 	{
 		//struct curl_slist *headers = NULL; /* init to NULL is important */
 		CURL *curl;
@@ -26,12 +26,13 @@ namespace MoreJeeAPI
 			// auto sq = sss.c_str();
 
 			string sURI;
+			string _response;
 			ws2s(uri, sURI);
 			curl_easy_setopt(curl, CURLOPT_URL, sURI.c_str());
 			/* example.com is redirected, so we tell libcurl to follow redirection */
 			//curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
 			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
-			curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
+			curl_easy_setopt(curl, CURLOPT_WRITEDATA, &_response);
 
 			struct curl_slist *headers = NULL; /* init to NULL is important */
 
@@ -42,6 +43,7 @@ namespace MoreJeeAPI
 				fprintf(stderr, "curl_easy_perform() failed: %s\n",
 					curl_easy_strerror(res));
 
+			s2ws(_response, response);
 			/* always cleanup */
 			curl_easy_cleanup(curl);
 		}

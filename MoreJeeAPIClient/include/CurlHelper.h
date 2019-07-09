@@ -8,6 +8,6 @@ namespace MoreJeeAPI
 {
 	using namespace std;
 
-	void HttpGet(const wstring& uri, const map<string, string>& header, string& respond);
+	void HttpGet(const wstring& uri, const map<string, string>& header, wstring& respond);
 
 }
