@@ -63,4 +63,35 @@ namespace MoreJeeAPI
 			curl_easy_cleanup(curl);
 		}
 	}
+
+	void HttpPost(const string & uri, const HttpHeader & header, const string& body, wstring & response)
+	{
+		CURL *curl;
+		CURLcode res;
+
+		/* get a curl handle */
+		curl = curl_easy_init();
+		if (curl)
+		{
+			string _response;
+			curl_easy_setopt(curl, CURLOPT_URL, uri.c_str());
+			/* Now specify the POST data */
+			curl_easy_setopt(curl, CURLOPT_POSTFIELDS, body);
+
+		/*	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
+			curl_easy_setopt(curl, CURLOPT_WRITEDATA, &_response);*/
+
+			/* Perform the request, res will get the return code */
+			res = curl_easy_perform(curl);
+			/* Check for errors */
+			if (res != CURLE_OK)
+			{
+				fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+			}
+
+
+			/* always cleanup */
+			curl_easy_cleanup(curl);
+		}
+	}
 }

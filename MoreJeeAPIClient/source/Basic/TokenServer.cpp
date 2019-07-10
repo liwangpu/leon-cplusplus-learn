@@ -1,4 +1,5 @@
 #include "../../include/Basic/TokenServer.h"
+#include "../thirdparty/jsoncons/json.hpp"
 #include "../../include/APIStartup.h"
 #include "../../include/CurlHelper.h"
 #include "../../include/StringHelper.h"
@@ -7,7 +8,7 @@ namespace MoreJeeAPI
 {
 	namespace Basic
 	{
-
+		using namespace jsoncons;
 
 
 		TokenServer::TokenServer()
@@ -23,6 +24,15 @@ namespace MoreJeeAPI
 
 		void TokenServer::RequestToken(const TokenRequestCommand & command, const TokenRequestDTO & result)
 		{
+
+			//string s;
+			//encode_json(command, s, indenting::indent);
+
+			/*		HttpHeader header;
+					wstring respond;
+					HttpPost(_sURI(), header, respond);*/
 		}
 	}
 }
+
+//JSONCONS_MEMBER_TRAITS_DECL(MoreJeeAPI::Basic::TokenRequestCommand, username, password);

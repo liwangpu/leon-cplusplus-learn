@@ -20,110 +20,84 @@
 //#include "Startup.h"
 //#include <jsoncons/json.hpp>
 
+#include "../thirdparty/jsoncons/json.hpp"
 #include "APIStartup.h"
 #include "OSS/FileServer.h"
+#include "Basic/TokenServer.h"
 #include "StringHelper.h"
 
 using namespace std;
 using namespace MoreJeeAPI;
 using namespace MoreJeeAPI::OSS;
-//using namespace jsoncons;
+using namespace MoreJeeAPI::Basic;
 
+using namespace jsoncons;
 
-//class stdstring
-//{
-//public:
-//	stdstring()
-//	{
-//		data = nullptr;
-//		count = 0;
-//		capacity = 0;
-//	}
-//	stdstring(const char* p)
-//	{
-//		count = strlen(p);
-//		capacity = count + 1;
-//		data = new char[count];
-//		strcpy_s(data, capacity, p);
-//	}
-//public:
-//	int count;
-//	int capacity;
-//	char* data;
-//};
-//
-//class mystdstring
-//{
-//public:
-//	mystdstring()
-//	{
-//		data = nullptr;
-//		count = 0;
-//		capacity = 0;
-//		freespace = 0;
-//	}
-//	mystdstring(const char* p)
-//	{
-//		count = strlen(p);
-//		capacity = count + 1;
-//		data = new char[count];
-//		strcpy_s(data, capacity, p);
-//		freespace = 0;
-//	}
-//public:
-//	char* data;
-//	int count;
-//	int capacity;
-//	int freespace;
-//	
-//};
+struct MyCommand
+{
+	wstring username;
+	wstring password;
+};
+
+JSONCONS_MEMBER_TRAITS_DECL(MyCommand, username, password);
 
 int main()
 {
 	wcout.imbue(locale("chs"));
 
-	//stdstring* str1 = new stdstring("hello");
-	//mystdstring* str2 = new mystdstring("world");
-	//mystdstring* str3 = (mystdstring*)str1;
-	//stdstring* str4 = (stdstring*)str2;
+	MyCommand cmd;
+	//cmd.username = "taobao1@tao.com";
+	//cmd.password = "e10adc3949ba59abbe56e057f20f883e";
 
-	//stdstring str5 = *str1;
-	//mystdstring str6 = *str2;
+	cmd.username = L"taobao1@tao.com";
+	cmd.password = L"e10adc3949ba59abbe56e057f20f883e";
 
-
-	//wstring body = encode_json<MyQuery>(q);
-	//string bodystr = wstr2str(body);
-
-	////char buff[512];
-	////string key = "apple";
-	////sprintf(buff, "search=%s&page=%d&pageSize=%d", key.c_str(), 2, 10);
-	////string result = buff;
-
-	//stream s;
-	//s << q;
-	//wchar_t wbuff[512];
-	//wstring wkey = L"apple";
-	//swprintf(wbuff, L"search=%s&page=%p&pageSize=%s", wkey.c_str(), 2, 10);
-
-	wstring url = L"http://192.168.99.100:9503/";
-	Startup & startup = Startup::Instance();
-	startup.Init(url);
+	string s;
+	encode_json(cmd,s, indenting::indent);
 
 
-	OSS::FileServer & fileSrv = FileServer::Instance();
-
-	FileQuery prm{ 1,3,L"测试" };
-
-	FileQueryDTO result;
-	fileSrv.Query(prm, result);
 
 
-	FileIdentityDTO file;
-	fileSrv.GetById(L"9911d914f43a682f1aa16c2efc1ad0b4", file);
 
+
+
+
+
+
+
+	//wstring url = L"http://192.168.99.100:9503/";
+	//Startup & startup = Startup::Instance();
+	//startup.Init(url);
+
+
+	//TokenServer& tokenSrv = TokenServer::Instance();
+
+	//TokenRequestCommand cmd;
+	//cmd.username = L"taobao1@tao.com";
+	//cmd.password = L"e10adc3949ba59abbe56e057f20f883e";
+
+	//TokenRequestDTO dto;
+
+	//tokenSrv.RequestToken(cmd, dto);
 
 	int a = 1;
 	int g = getchar();
+
+
+	//OSS::FileServer & fileSrv = FileServer::Instance();
+
+	//FileQuery prm{ 1,3,L"测试" };
+
+	//FileQueryDTO result;
+	//fileSrv.Query(prm, result);
+
+
+	//FileIdentityDTO file;
+	//fileSrv.GetById(L"9911d914f43a682f1aa16c2efc1ad0b4", file);
+
+
+	//int a = 1;
+	//int g = getchar();
 
 
 	//char str[] = "%s => %d";
