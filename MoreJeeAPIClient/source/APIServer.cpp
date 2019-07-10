@@ -8,7 +8,7 @@ namespace MoreJeeAPI
 	{
 		static wstring lastServer;
 		bool bServerChange = lastServer != server;
-		if (bServerChange)
+		if (bServerChange || _URIwcptr == nullptr)
 		{
 			lastServer = server;
 			wstring str = server + resource;

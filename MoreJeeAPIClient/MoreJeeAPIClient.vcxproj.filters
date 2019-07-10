@@ -21,9 +21,6 @@
     <ClInclude Include="include\APIStartup.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="include\APIServer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="include\CurlHelper.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -31,6 +28,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="include\Basic\TokenServer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\APIServer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Basic\AccountServer.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -54,6 +57,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="source\Basic\TokenServer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Basic\AccountServer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

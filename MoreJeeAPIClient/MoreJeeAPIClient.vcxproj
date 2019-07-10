@@ -148,6 +148,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\Basic\AccountServer.h" />
     <ClInclude Include="include\APIServer.h" />
     <ClInclude Include="include\APIStartup.h" />
     <ClInclude Include="include\CurlHelper.h" />
@@ -156,6 +157,7 @@
     <ClInclude Include="include\Basic\TokenServer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\Basic\AccountServer.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="source\APIServer.cpp" />
     <ClCompile Include="source\APIStartup.cpp" />

@@ -2,6 +2,7 @@
 #include "../thirdparty/jsoncons/json.hpp"
 #include "../include/CurlHelper.h"
 #include "../include/StringHelper.h"
+#include "../include/APIStartup.h"
 
 namespace MoreJeeAPI
 {
@@ -14,13 +15,13 @@ namespace MoreJeeAPI
 		return nmemb;
 	}
 
-	void HttpGet(const string& uri, const HttpHeader& header, wstring& response)
+	bool HttpGet(const string& uri, const HttpHeader& header, wstring& response, HttpErrorMessage* error)
 	{
 		map<string, string> query;
-		HttpGet(uri, query, header, response);
+		return	HttpGet(uri, query, header, response, error);
 	}
 
-	void HttpGet(const string & uri, const map<string, string>& query, const HttpHeader & header, wstring & response)
+	bool HttpGet(const string & uri, const map<string, string>& query, const HttpHeader & header, wstring & response, HttpErrorMessage* error)
 	{
 		//struct curl_slist *headers = NULL; /* init to NULL is important */
 		CURL *curl;
@@ -48,22 +49,50 @@ namespace MoreJeeAPI
 
 			/* example.com is redirected, so we tell libcurl to follow redirection */
 			//curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+			struct curl_slist *headers = NULL;
+			headers = curl_slist_append(headers, "Accept:application/json");
+			wstring _token = Startup::Instance().Token();
+			if (!_token.empty())
+				headers = curl_slist_append(headers, ws2s((L"Authorization:bearer " + _token)).c_str());
+
+
+			curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
 			curl_easy_setopt(curl, CURLOPT_WRITEDATA, &_response);
 
-			struct curl_slist *headers = NULL; /* init to NULL is important */
+			/* Check for errors */
+			bool bSuccessful = false;
+			long response_code = 0;
+
+
 
 			/* Perform the request, res will get the return code */
 			res = curl_easy_perform(curl);
-			/* Check for errors */
-			if (res != CURLE_OK)
-				fprintf(stderr, "curl_easy_perform() failed: %s\n",
-					curl_easy_strerror(res));
+			curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);//获取http 状态码 
 
-			response = s2ws(_response);
+			if (res == CURLE_OK)
+			{
+				bSuccessful = response_code >= 200 && response_code < 300;
+				if (!bSuccessful && error && !_response.empty())
+					*error = decode_json<HttpErrorMessage>(s2ws(_response));
+
+				if (bSuccessful)
+					response = s2ws(_response);
+			}
+			else
+			{
+				if (error)
+					error->messages.push_back(s2ws(curl_easy_strerror(res)));
+			}
+
+			if (error)
+				error->statusCode = response_code;
+
 			/* always cleanup */
 			curl_easy_cleanup(curl);
+			return bSuccessful;
 		}
+		return false;
 	}
 
 	bool HttpPost(const string & uri, const HttpHeader & header, const string& body, wstring & response, HttpErrorMessage* error)
@@ -77,7 +106,9 @@ namespace MoreJeeAPI
 		{
 			struct curl_slist *headers = NULL;
 			headers = curl_slist_append(headers, "Accept:application/json");
-			//headers = curl_slist_append(headers, ("Content-Type:" + header.ContentType).c_str());
+			wstring _token = Startup::Instance().Token();
+			if (!_token.empty())
+				headers = curl_slist_append(headers, ws2s((L"Authorization:bearer " + _token)).c_str());
 			if (!header.ContentType.empty())
 				headers = curl_slist_append(headers, ("Content-Type:" + header.ContentType + ";charset=utf-8").c_str());
 
@@ -86,7 +117,7 @@ namespace MoreJeeAPI
 
 			curl_easy_setopt(curl, CURLOPT_URL, uri.c_str());
 
-			curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);//改协议头
+			curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 			curl_easy_setopt(curl, CURLOPT_POSTFIELDS, body.c_str());
 
 			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
@@ -104,16 +135,15 @@ namespace MoreJeeAPI
 			if (res == CURLE_OK)
 			{
 				bSuccessful = response_code >= 200 && response_code < 300;
-				if (!bSuccessful && error)
+				if (!bSuccessful && error && !_response.empty())
 					*error = decode_json<HttpErrorMessage>(s2ws(_response));
 				if (bSuccessful)
 					response = s2ws(_response);
 			}
 			else
 			{
-				string aaa = curl_easy_strerror(res);
 				if (error)
-					error->messages.push_back(s2ws(aaa));
+					error->messages.push_back(s2ws(curl_easy_strerror(res)));
 			}
 
 			if (error)
@@ -122,6 +152,7 @@ namespace MoreJeeAPI
 			curl_easy_cleanup(curl);
 			return bSuccessful;
 		}
+		return false;
 	}
 }
 JSONCONS_MEMBER_TRAITS_DECL(MoreJeeAPI::HttpErrorMessage, statusCode, messages);

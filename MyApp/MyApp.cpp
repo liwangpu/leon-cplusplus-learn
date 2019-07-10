@@ -24,7 +24,7 @@
 #include "APIStartup.h"
 #include "OSS/FileServer.h"
 #include "Basic/TokenServer.h"
-#include "StringHelper.h"
+#include "Basic/AccountServer.h"
 
 using namespace std;
 using namespace MoreJeeAPI;
@@ -54,19 +54,25 @@ int main()
 	Startup & startup = Startup::Instance();
 	startup.Init(url);
 
-
+	
 	TokenServer& tokenSrv = TokenServer::Instance();
+	AccountServer& accountSrv = AccountServer::Instance();
 
 	TokenRequestCommand cmd;
 	cmd.username = L"taobao1@tao.com";
 	cmd.password = L"e10adc3949ba59abbe56e057f20f883e";
 
-	TokenRequestDTO dto;
+	TokenRequestDTO tokenDto;
+	HttpErrorMessage requestTokenErr;
+	tokenSrv.RequestToken(cmd, tokenDto, &requestTokenErr);
+
+	AccountProfileDTO profileDto;
+	HttpErrorMessage profileErr;
+	accountSrv.GetProfile(profileDto,&profileErr);
+	
 
 
-	HttpErrorMessage err;
 
-	tokenSrv.RequestToken(cmd, dto, &err);
 
 	int a = 1;
 	int g = getchar();

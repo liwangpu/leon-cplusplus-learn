@@ -26,8 +26,8 @@ namespace MoreJeeAPI
 	public:
 		static Startup& Instance();//获取启动器实例
 		void Init(const wstring& server);//初始化启动器
-		const wchar_t* Token() { return _Token; }
-		const wchar_t* Server() { return _Server; }
+		const wstring Token() { return _Token != nullptr ? _Token : L""; }
+		const wstring Server() { return _Server != nullptr ? _Server : L""; }
 		void _ResetToken(const wstring& token);
 	};
 
