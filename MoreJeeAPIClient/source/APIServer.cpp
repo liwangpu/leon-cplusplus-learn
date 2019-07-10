@@ -1,4 +1,5 @@
 #include "../include/APIServer.h"
+#include "../include/StringHelper.h"
 
 namespace MoreJeeAPI
 {
@@ -11,14 +12,21 @@ namespace MoreJeeAPI
 		{
 			lastServer = server;
 			wstring str = server + resource;
-			if (_URI != nullptr)
+			if (_URIwcptr != nullptr)
 			{
-				delete[] _URI;
-				_URI = nullptr;
+				delete[] _URIwcptr;
+				_URIwcptr = nullptr;
 			}
-			_URI = new wchar_t[str.size() + 1];
-			wcscpy_s(_URI, str.size() + 1, str.c_str());
+			_URIwcptr = new wchar_t[str.size() + 1];
+			wcscpy_s(_URIwcptr, str.size() + 1, str.c_str());
 		}
 
+	}
+	string APIServer::_sURI()
+	{
+		wstring wstr = _URIwcptr;
+		string str;
+		ws2s(wstr, str);
+		return str;
 	}
 }

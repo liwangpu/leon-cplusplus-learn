@@ -14,7 +14,6 @@ namespace MoreJeeAPI
 	{
 		using namespace std;
 
-		//分页查询参数
 		struct FileQuery
 		{
 			short page;
@@ -26,6 +25,10 @@ namespace MoreJeeAPI
 		{
 			wstring id;
 			wstring name;
+			wstring url;
+			wstring fileExt;
+			long size;
+			short int fileState;
 		};
 
 		struct FileQueryDTO
@@ -34,7 +37,15 @@ namespace MoreJeeAPI
 			vector<FileListDTO> data;
 		};
 
-
+		struct FileIdentityDTO
+		{
+			wstring id;
+			wstring name;
+			wstring url;
+			wstring fileExt;
+			long size;
+			short int fileState;
+		};
 
 
 
@@ -44,7 +55,8 @@ namespace MoreJeeAPI
 			FileServer();
 		public:
 			static FileServer& Instance();//获取启动器实例
-			void Query(const FileQuery& query, FileQueryDTO & result);
+			void Query(const FileQuery& query, FileQueryDTO& result);
+			void GetById(const wstring& id, FileIdentityDTO& result);
 		};
 	}
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 
+
 #ifdef MOREJEEAPICLIENT_EXPORTS
 #define MOREJEEAPICLIENT_API __declspec(dllexport)
 #else
@@ -14,9 +15,9 @@ namespace MoreJeeAPI
 	class MOREJEEAPICLIENT_API APIServer
 	{
 	protected:
-		wchar_t* _URI = nullptr;
+		wchar_t* _URIwcptr = nullptr;
 		void _ResetRUI(const wstring& server, const wstring &resource);
-
+		string _sURI();
 	};
 
 }

@@ -30,38 +30,66 @@ using namespace MoreJeeAPI::OSS;
 //using namespace jsoncons;
 
 
-struct MyQuery
-{
-	short page;
-	short pageSize;
-	wstring search;
-
-	//stream& operator<< (stream& s)
-	//{
-	//	s << page << pageSize << search;
-	//	return s;
-	//}
-};
-
-//
-//string format(const std::string& format, ...)
+//class stdstring
 //{
-//	va_list args;
-//	va_start(args, format);
-//	size_t len = vsnprintf(NULL, 0, format.c_str(), args);
-//	va_end(args);
-//	std::vector<char> vec(len + 1);
-//	va_start(args, format.c_str());
-//	std::vsnprintf(&vec[0], len + 1, format.c_str(), args);
-//	va_end(args);
-//	return &vec[0];
-//}
+//public:
+//	stdstring()
+//	{
+//		data = nullptr;
+//		count = 0;
+//		capacity = 0;
+//	}
+//	stdstring(const char* p)
+//	{
+//		count = strlen(p);
+//		capacity = count + 1;
+//		data = new char[count];
+//		strcpy_s(data, capacity, p);
+//	}
+//public:
+//	int count;
+//	int capacity;
+//	char* data;
+//};
+//
+//class mystdstring
+//{
+//public:
+//	mystdstring()
+//	{
+//		data = nullptr;
+//		count = 0;
+//		capacity = 0;
+//		freespace = 0;
+//	}
+//	mystdstring(const char* p)
+//	{
+//		count = strlen(p);
+//		capacity = count + 1;
+//		data = new char[count];
+//		strcpy_s(data, capacity, p);
+//		freespace = 0;
+//	}
+//public:
+//	char* data;
+//	int count;
+//	int capacity;
+//	int freespace;
+//	
+//};
 
 int main()
 {
 	wcout.imbue(locale("chs"));
-	//MyQuery q;
-	//q.page = 1;
+
+	//stdstring* str1 = new stdstring("hello");
+	//mystdstring* str2 = new mystdstring("world");
+	//mystdstring* str3 = (mystdstring*)str1;
+	//stdstring* str4 = (stdstring*)str2;
+
+	//stdstring str5 = *str1;
+	//mystdstring str6 = *str2;
+
 
 	//wstring body = encode_json<MyQuery>(q);
 	//string bodystr = wstr2str(body);
@@ -77,23 +105,25 @@ int main()
 	//wstring wkey = L"apple";
 	//swprintf(wbuff, L"search=%s&page=%p&pageSize=%s", wkey.c_str(), 2, 10);
 
-	//wstring url = L"http://192.168.99.100:9503/";
-	//Startup & startup = Startup::Instance();
-	//startup.Init(url);
+	wstring url = L"http://192.168.99.100:9503/";
+	Startup & startup = Startup::Instance();
+	startup.Init(url);
 
 
-	//OSS::FileServer & fileSrv = FileServer::Instance();
+	OSS::FileServer & fileSrv = FileServer::Instance();
 
-	//FileQuery prm{ 1,100 };
+	FileQuery prm{ 1,3,L"测试" };
 
-	//FileQueryDTO result;
-	//fileSrv.Query(prm, result);
-
-
-	//result.data[0].test();
+	FileQueryDTO result;
+	fileSrv.Query(prm, result);
 
 
+	FileIdentityDTO file;
+	fileSrv.GetById(L"9911d914f43a682f1aa16c2efc1ad0b4", file);
 
+
+	int a = 1;
+	int g = getchar();
 
 
 	//char str[] = "%s => %d";
@@ -101,18 +131,18 @@ int main()
 
 
 
-	wstring search = L"小明";
+	//wstring search = L"小明";
 
-	wostringstream out;
+	//wostringstream out;
 
-	out << "search=" << search;
+	//out << "search=" << search;
 
-	wcout << out.str() << endl;
+	//wcout << out.str() << endl;
 
 
 
-	int a = 1;
-	int g = getchar();
+	//int a = 1;
+	//int g = getchar();
 
 	//map<string, int> myMsg;
 

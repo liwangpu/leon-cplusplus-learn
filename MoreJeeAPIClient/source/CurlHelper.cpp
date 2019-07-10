@@ -12,25 +12,38 @@ namespace MoreJeeAPI
 		return nmemb;
 	}
 
+	void HttpGet(const string& uri, const HttpHeader& header, wstring& response)
+	{
+		map<string, string> query;
+		HttpGet(uri, query, header, response);
+	}
 
-	void HttpGet(const wstring& uri, const map<string, string>& header, wstring& response)
+	void HttpGet(const string & uri, const map<string, string>& query, const HttpHeader & header, wstring & response)
 	{
 		//struct curl_slist *headers = NULL; /* init to NULL is important */
 		CURL *curl;
 		CURLcode res;
 
 		curl = curl_easy_init();
-		if (curl) {
-
-			//auto aaa = ws2cptr(uri);
-			//string sss;
-			// ws2s(uri, sss);
-			// auto sq = sss.c_str();
-
-			string sURI;
+		if (curl)
+		{
 			string _response;
-			ws2s(uri, sURI);
-			curl_easy_setopt(curl, CURLOPT_URL, sURI.c_str());
+
+			if (!query.empty())
+			{
+				auto nUri = uri + "?";
+				for (const auto& kv : query)
+				{
+					auto val = curl_easy_escape(curl, kv.second.c_str(), kv.second.length());
+					nUri += kv.first + "=" + val + "&";
+				}
+
+				curl_easy_setopt(curl, CURLOPT_URL, nUri.c_str());
+			}
+			else
+				curl_easy_setopt(curl, CURLOPT_URL, uri.c_str());
+
+
 			/* example.com is redirected, so we tell libcurl to follow redirection */
 			//curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
 			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);

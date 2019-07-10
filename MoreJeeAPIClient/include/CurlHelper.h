@@ -6,6 +6,12 @@ namespace MoreJeeAPI
 {
 	using namespace std;
 
-	void HttpGet(const wstring& uri, const map<string, string>& header, wstring& respond);
+	struct HttpHeader
+	{
+		string ContentType = "application/json";
+	};
+
+	void HttpGet(const string& uri, const HttpHeader& header, wstring& response);
+	void HttpGet(const string& uri, const map<string, string>& query, const HttpHeader& header, wstring& response);
 
 }
