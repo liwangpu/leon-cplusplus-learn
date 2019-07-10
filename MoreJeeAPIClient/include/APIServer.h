@@ -1,18 +1,18 @@
 #pragma once
 #include <string>
-
-
-#ifdef MOREJEEAPICLIENT_EXPORTS
-#define MOREJEEAPICLIENT_API __declspec(dllexport)
-#else
-#define MOREJEEAPICLIENT_API __declspec(dllimport)
-#endif
+#include <vector>
 
 namespace MoreJeeAPI
 {
 	using namespace std;
 
-	class MOREJEEAPICLIENT_API APIServer
+	struct HttpErrorMessage
+	{
+		short statusCode = 0;
+		vector<wstring> messages;
+	};
+
+	class APIServer
 	{
 	protected:
 		wchar_t* _URIwcptr = nullptr;

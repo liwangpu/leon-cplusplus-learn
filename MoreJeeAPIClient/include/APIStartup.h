@@ -24,10 +24,11 @@ namespace MoreJeeAPI
 		Startup();
 
 	public:
-		static  Startup& Instance();//获取启动器实例
+		static Startup& Instance();//获取启动器实例
 		void Init(const wstring& server);//初始化启动器
 		const wchar_t* Token() { return _Token; }
 		const wchar_t* Server() { return _Server; }
+		void _ResetToken(const wstring& token);
 	};
 
 

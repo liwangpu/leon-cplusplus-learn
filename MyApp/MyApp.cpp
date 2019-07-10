@@ -45,10 +45,11 @@ JSONCONS_MEMBER_TRAITS_DECL(MyCommand, username, password);
 
 int main()
 {
-	wcout.imbue(locale("chs"));
+	//wcout.imbue(locale("chs"));
 
+	//wstm.imbue(locale("en_US.UTF-8"));
 
-
+	//wstring url = L"http://192.168.99.100:95031/";
 	wstring url = L"http://192.168.99.100:9503/";
 	Startup & startup = Startup::Instance();
 	startup.Init(url);
@@ -62,7 +63,10 @@ int main()
 
 	TokenRequestDTO dto;
 
-	tokenSrv.RequestToken(cmd, dto);
+
+	HttpErrorMessage err;
+
+	tokenSrv.RequestToken(cmd, dto, &err);
 
 	int a = 1;
 	int g = getchar();

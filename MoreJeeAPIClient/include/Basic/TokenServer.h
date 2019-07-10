@@ -15,6 +15,7 @@ namespace MoreJeeAPI
 	{
 		using namespace std;
 
+
 		struct TokenRequestCommand
 		{
 			wstring username;
@@ -33,7 +34,7 @@ namespace MoreJeeAPI
 			TokenServer();
 		public:
 			static TokenServer& Instance();
-			void RequestToken(const TokenRequestCommand& command, const TokenRequestDTO& result);
+			bool RequestToken(const TokenRequestCommand& command, TokenRequestDTO& result, HttpErrorMessage* error = nullptr);
 		};
 	}
 }

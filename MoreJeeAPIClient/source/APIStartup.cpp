@@ -25,6 +25,18 @@ namespace MoreJeeAPI
 		setlocale(LC_ALL, "");
 	}
 
+	void Startup::_ResetToken(const wstring& token)
+	{
+		//_Token = token.c_str();
+		if (_Token != nullptr)
+		{
+			delete[] _Token;
+			_Token = nullptr;
+		}
+		_Token = new wchar_t[token.size() + 1];
+		wcscpy_s(_Token, token.size() + 1, token.c_str());
+	}
+
 
 }
 
