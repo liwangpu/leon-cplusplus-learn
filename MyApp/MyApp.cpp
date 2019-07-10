@@ -20,28 +20,30 @@
 //#include "Startup.h"
 //#include <jsoncons/json.hpp>
 
-#include "../thirdparty/jsoncons/json.hpp"
+//#include "../thirdparty/jsoncons/json.hpp"
 #include "APIStartup.h"
 #include "OSS/FileServer.h"
 #include "Basic/TokenServer.h"
 #include "Basic/AccountServer.h"
+#include "MoreJee/TextureServer.h"
 
 using namespace std;
 using namespace MoreJeeAPI;
 using namespace MoreJeeAPI::OSS;
 using namespace MoreJeeAPI::Basic;
+using namespace MoreJeeAPI::MoreJee;
 
-using namespace jsoncons;
+//using namespace jsoncons;
 
 
 
-struct MyCommand
-{
-	wstring username;
-	wstring password;
-};
-
-JSONCONS_MEMBER_TRAITS_DECL(MyCommand, username, password);
+//struct MyCommand
+//{
+//	wstring username;
+//	wstring password;
+//};
+//
+//JSONCONS_MEMBER_TRAITS_DECL(MyCommand, username, password);
 
 int main()
 {
@@ -54,24 +56,29 @@ int main()
 	Startup & startup = Startup::Instance();
 	startup.Init(url);
 
-	
+
 	TokenServer& tokenSrv = TokenServer::Instance();
 	AccountServer& accountSrv = AccountServer::Instance();
+	TextureServer& textureSrv = TextureServer::Instance();
 
 	TokenRequestCommand cmd;
 	cmd.username = L"taobao1@tao.com";
 	cmd.password = L"e10adc3949ba59abbe56e057f20f883e";
 
+	////请求Token
 	TokenRequestDTO tokenDto;
 	HttpErrorMessage requestTokenErr;
 	tokenSrv.RequestToken(cmd, tokenDto, &requestTokenErr);
 
-	AccountProfileDTO profileDto;
-	HttpErrorMessage profileErr;
-	accountSrv.GetProfile(profileDto,&profileErr);
-	
+	////获取用户个人信息
+	//AccountProfileDTO profileDto;
+	//HttpErrorMessage profileErr;
+	//accountSrv.GetProfile(profileDto,&profileErr);
 
 
+	TextureQuery q{ 1,300 };
+	TextureQueryDTO textureQueryDto;
+	textureSrv.Query(q, textureQueryDto);
 
 
 	int a = 1;

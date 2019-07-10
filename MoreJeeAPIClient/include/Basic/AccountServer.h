@@ -1,5 +1,4 @@
 #pragma once
-#include <string>
 #include "../APIServer.h"
 
 #ifdef MOREJEEAPICLIENT_EXPORTS
