@@ -33,6 +33,8 @@ using namespace MoreJeeAPI::Basic;
 
 using namespace jsoncons;
 
+
+
 struct MyCommand
 {
 	wstring username;
@@ -45,40 +47,22 @@ int main()
 {
 	wcout.imbue(locale("chs"));
 
-	MyCommand cmd;
-	//cmd.username = "taobao1@tao.com";
-	//cmd.password = "e10adc3949ba59abbe56e057f20f883e";
 
+
+	wstring url = L"http://192.168.99.100:9503/";
+	Startup & startup = Startup::Instance();
+	startup.Init(url);
+
+
+	TokenServer& tokenSrv = TokenServer::Instance();
+
+	TokenRequestCommand cmd;
 	cmd.username = L"taobao1@tao.com";
 	cmd.password = L"e10adc3949ba59abbe56e057f20f883e";
 
-	string s;
-	encode_json(cmd,s, indenting::indent);
+	TokenRequestDTO dto;
 
-
-
-
-
-
-
-
-
-
-
-	//wstring url = L"http://192.168.99.100:9503/";
-	//Startup & startup = Startup::Instance();
-	//startup.Init(url);
-
-
-	//TokenServer& tokenSrv = TokenServer::Instance();
-
-	//TokenRequestCommand cmd;
-	//cmd.username = L"taobao1@tao.com";
-	//cmd.password = L"e10adc3949ba59abbe56e057f20f883e";
-
-	//TokenRequestDTO dto;
-
-	//tokenSrv.RequestToken(cmd, dto);
+	tokenSrv.RequestToken(cmd, dto);
 
 	int a = 1;
 	int g = getchar();
@@ -101,7 +85,7 @@ int main()
 
 
 	//char str[] = "%s => %d";
-	//std::cout << format("search=%s", "apples") << endl;
+	//cout << format("search=%s", "apples") << endl;
 
 
 
@@ -134,7 +118,7 @@ int main()
 
 	//for (auto const& p : myMsg)
 	//{
-	//	std::cout << p.first << ' ' << p.second << '\n';
+	//	cout << p.first << ' ' << p.second << '\n';
 	//}
 
 	//wcout << myMsg.find(1) << endl;

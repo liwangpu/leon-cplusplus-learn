@@ -26,13 +26,10 @@ namespace MoreJeeAPI
 
 		void FileServer::Query(const FileQuery & query, FileQueryDTO & result)
 		{
-			string search;
-			ws2s(query.search, search);
-
 			map<string, string > q;
 			q["page"] = to_string(query.page);
 			q["pageSize"] = to_string(query.pageSize);
-			q["search"] = search;
+			q["search"] = ws2s(query.search);
 
 
 			HttpHeader header;
@@ -43,12 +40,9 @@ namespace MoreJeeAPI
 
 		void FileServer::GetById(const wstring & id, FileIdentityDTO & result)
 		{
-			string sid;
-			ws2s(id, sid);
-
 			HttpHeader header;
 			wstring respond;
-			HttpGet(_sURI() + "/" + sid, header, respond);
+			HttpGet(_sURI() + "/" + ws2s(id), header, respond);
 			result = decode_json<FileIdentityDTO>(respond);
 		}
 

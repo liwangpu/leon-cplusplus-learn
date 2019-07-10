@@ -24,15 +24,14 @@ namespace MoreJeeAPI
 
 		void TokenServer::RequestToken(const TokenRequestCommand & command, const TokenRequestDTO & result)
 		{
+			wstring body;
+			encode_json(command, body);
 
-			//string s;
-			//encode_json(command, s, indenting::indent);
-
-			/*		HttpHeader header;
-					wstring respond;
-					HttpPost(_sURI(), header, respond);*/
+			HttpHeader header;
+			wstring respond;
+			HttpPost(_sURI(), header, ws2s(body), respond);
 		}
 	}
 }
 
-//JSONCONS_MEMBER_TRAITS_DECL(MoreJeeAPI::Basic::TokenRequestCommand, username, password);
+JSONCONS_MEMBER_TRAITS_DECL(MoreJeeAPI::Basic::TokenRequestCommand, username, password);

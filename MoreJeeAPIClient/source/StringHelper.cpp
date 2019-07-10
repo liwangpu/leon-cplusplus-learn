@@ -5,32 +5,33 @@
 
 namespace MoreJeeAPI
 {
-	void s2ws(const string & str, wstring & wstr)
+
+	wstring s2ws(const string & str)
 	{
-		using convert_typeX = codecvt_utf8<wchar_t>;
-		wstring_convert<convert_typeX, wchar_t> converterX;
-		wstr = converterX.from_bytes(str);
+		return wstring_convert<codecvt_utf8<wchar_t>, wchar_t>().from_bytes(str);
+		//wstring_convert<codecvt_utf8<wchar_t>, wchar_t> converterX;
+		//return converterX.from_bytes(str);
 	}
 
-	void ws2s(const wstring & wstr, string & str)
+	string ws2s(const wstring & wstr)
 	{
-		using convert_typeX = codecvt_utf8<wchar_t>;
-		wstring_convert<convert_typeX, wchar_t> converterX;
-		str = converterX.to_bytes(wstr);
+		wstring_convert<codecvt_utf8<wchar_t>, wchar_t> converterX;
+		string s = converterX.to_bytes(wstr);
+		return s;
 	}
 
-	const char* ws2cptr(const wstring & wstr)
-	{
-		string str;
-		ws2s(wstr, str);
-		return str.c_str();
-	}
+	//const char* ws2cptr(const wstring & wstr)
+	//{
+	//	string str;
+	//	ws2s(wstr, str);
+	//	return str.c_str();
+	//}
 
-	const wchar_t * s2wcptr(const string & str)
-	{
-		wstring wstr;
-		s2ws(str, wstr);
-		return wstr.c_str();
-	}
+	//const wchar_t * s2wcptr(const string & str)
+	//{
+	//	wstring wstr;
+	//	s2ws(str, wstr);
+	//	return wstr.c_str();
+	//}
 
 }

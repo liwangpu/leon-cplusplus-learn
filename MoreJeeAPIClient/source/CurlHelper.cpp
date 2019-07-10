@@ -58,7 +58,7 @@ namespace MoreJeeAPI
 				fprintf(stderr, "curl_easy_perform() failed: %s\n",
 					curl_easy_strerror(res));
 
-			s2ws(_response, response);
+			response = s2ws(_response);
 			/* always cleanup */
 			curl_easy_cleanup(curl);
 		}
@@ -73,15 +73,22 @@ namespace MoreJeeAPI
 		curl = curl_easy_init();
 		if (curl)
 		{
+			struct curl_slist *headers = NULL;
+			//headers = curl_slist_append(headers, "Accept: Agent-007");
+			if (!header.ContentType.empty())
+				headers = curl_slist_append(headers, ("Content-Type:" + header.ContentType).c_str());
+
+
+
 			string _response;
 			curl_easy_setopt(curl, CURLOPT_URL, uri.c_str());
 			/* Now specify the POST data */
 			curl_easy_setopt(curl, CURLOPT_POSTFIELDS, body);
+			curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);//改协议头
+			/*	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
+				curl_easy_setopt(curl, CURLOPT_WRITEDATA, &_response);*/
 
-		/*	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
-			curl_easy_setopt(curl, CURLOPT_WRITEDATA, &_response);*/
-
-			/* Perform the request, res will get the return code */
+				/* Perform the request, res will get the return code */
 			res = curl_easy_perform(curl);
 			/* Check for errors */
 			if (res != CURLE_OK)

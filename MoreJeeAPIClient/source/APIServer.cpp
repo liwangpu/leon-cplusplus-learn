@@ -25,8 +25,6 @@ namespace MoreJeeAPI
 	string APIServer::_sURI()
 	{
 		wstring wstr = _URIwcptr;
-		string str;
-		ws2s(wstr, str);
-		return str;
+		return ws2s(wstr);
 	}
 }
