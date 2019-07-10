@@ -153,6 +153,7 @@
     <ClInclude Include="include\CurlHelper.h" />
     <ClInclude Include="include\OSS\FileServer.h" />
     <ClInclude Include="include\StringHelper.h" />
+    <ClInclude Include="include\Basic\TokenServer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -161,6 +162,7 @@
     <ClCompile Include="source\CurlHelper.cpp" />
     <ClCompile Include="source\OSS\FileServer.cpp" />
     <ClCompile Include="source\StringHelper.cpp" />
+    <ClCompile Include="source\Basic\TokenServer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -54,7 +54,7 @@ namespace MoreJeeAPI
 		private:
 			FileServer();
 		public:
-			static FileServer& Instance();//获取启动器实例
+			static FileServer& Instance();
 			void Query(const FileQuery& query, FileQueryDTO& result);
 			void GetById(const wstring& id, FileIdentityDTO& result);
 		};
