@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include "../thirdparty/jsoncons/json.hpp"
 
 #ifdef MOREJEEAPICLIENT_EXPORTS
 #define MOREJEEAPICLIENT_API __declspec(dllexport)
@@ -35,3 +36,5 @@ namespace MoreJeeAPI
 	};
 
 }
+
+JSONCONS_MEMBER_TRAITS_DECL(MoreJeeAPI::HttpPatchData, op, path, value);

@@ -60,12 +60,19 @@ namespace MoreJeeAPI
 		bool ProductServer::Update(const wstring & id, const vector<HttpPatchData>& command, HttpErrorMessage * error)
 		{
 			wstring body;
-			body = L"[{\"op\":\"add\",\"path\":\"name\",\"value\":\"after patch name 01\"},{\"op\":\"add\",\"path\":\"/description\",\"value\":\"good\"}]";
+			encode_json(command, body);
 
 			HttpHeader header;
 			header.ContentType = "application/json-patch+json";
 			wstring response;
 			return HttpPatch(_sURI() + "/" + ws2s(id), header, ws2s(body), response, error);
+		}
+
+		bool ProductServer::Delete(const wstring & id, HttpErrorMessage * error)
+		{
+			HttpHeader header;
+			wstring response;
+			return HttpDelete(_sURI() + "/" + ws2s(id), header, error);
 		}
 
 	}
