@@ -22,7 +22,13 @@ namespace MoreJeeAPI
 		}
 		_Server = new wchar_t[server.size() + 1];
 		wcscpy_s(_Server, server.size() + 1, server.c_str());
-		setlocale(LC_ALL, "");
+		setlocale(LC_ALL, ""); 
+	}
+
+	const wstring Startup::Version()
+	{
+		static wstring version = L"1.0.1 " __TIMESTAMP__;
+		return version;
 	}
 
 	void Startup::_ResetToken(const wstring& token)

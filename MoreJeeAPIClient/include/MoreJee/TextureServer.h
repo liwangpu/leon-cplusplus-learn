@@ -1,12 +1,6 @@
 #pragma once
 #include "../APIServer.h"
 
-#ifdef MOREJEEAPICLIENT_EXPORTS
-#define MOREJEEAPICLIENT_API __declspec(dllexport)
-#else
-#define MOREJEEAPICLIENT_API __declspec(dllimport)
-#endif
-
 namespace MoreJeeAPI
 {
 	namespace MoreJee

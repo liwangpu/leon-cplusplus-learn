@@ -54,15 +54,16 @@ int main()
 
 	//wstring url = L"http://192.168.99.100:95031/";
 	wstring url = L"http://192.168.99.100:9503/";
-	Startup & startup = Startup::Instance();
+	Startup &startup = Startup::Instance();
 	startup.Init(url);
 
+	auto v = startup.Version();
 
-	TokenServer tokenSrv = TokenServer::Instance();
-	FileServer fileSrv = FileServer::Instance();
-	AccountServer accountSrv = AccountServer::Instance();
-	TextureServer textureSrv = TextureServer::Instance();
-	ProductServer productSrv = ProductServer::Instance();
+	TokenServer& tokenSrv = TokenServer::Instance();
+	FileServer& fileSrv = FileServer::Instance();
+	AccountServer& accountSrv = AccountServer::Instance();
+	TextureServer& textureSrv = TextureServer::Instance();
+	ProductServer& productSrv = ProductServer::Instance();
 
 	{
 		////请求Token
@@ -75,12 +76,12 @@ int main()
 	}
 
 
-	{
-		////获取用户个人信息
-		AccountProfileDTO dto;
-		HttpErrorMessage err;
-		accountSrv.GetProfile(dto, &err);
-	}
+	//{
+	//	////获取用户个人信息
+	//	AccountProfileDTO dto;
+	//	HttpErrorMessage err;
+	//	accountSrv.GetProfile(dto, &err);
+	//}
 
 	//{
 	//	////获取文件列表
@@ -113,16 +114,20 @@ int main()
 	//	textureSrv.GetById(L"PNfmzjo3pgA8czB", dto, &err);
 	//}
 
+	//{
+	//	////获取产品列表
+	//	ProductQuery q{ 1,300 };
+	//	ProductQueryDTO dto;
+	//	HttpErrorMessage err;
+	//	productSrv.Query(q, dto, &err);
+	//}
 
-	{
-		////获取产品列表
-		ProductQuery q{ 1,300 };
-		ProductQueryDTO dto;
-		HttpErrorMessage err;
-		productSrv.Query(q, dto, &err);
-	}
-
-
+	//{
+	//	////获取单个产品信息
+	//	HttpErrorMessage err;
+	//	ProductIdentityQueryDTO dto;
+	//	productSrv.GetById(L"BBfmWwMDwnKnSE", dto, &err);
+	//}
 
 
 

@@ -39,7 +39,7 @@ namespace MoreJeeAPI
 			return successful;
 		}
 		bool TextureServer::GetById(const wstring & id, TextureIdentityQueryDTO & result, HttpErrorMessage * error)
-		{
+		{   
 			HttpHeader header;
 			wstring respond;
 			bool successful = HttpGet(_sURI() + "/" + ws2s(id), header, respond);

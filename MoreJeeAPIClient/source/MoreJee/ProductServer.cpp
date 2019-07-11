@@ -18,7 +18,7 @@ namespace MoreJeeAPI
 		ProductServer& ProductServer::Instance()
 		{
 			static ProductServer _Instance;
-			_Instance._ResetRUI(Startup::Instance().Server(), L"MoreJee/Textures");
+			_Instance._ResetRUI(Startup::Instance().Server(), L"MoreJee/Products");
 			return _Instance;
 		}
 		bool ProductServer::Query(const ProductQuery & query, ProductQueryDTO & result, HttpErrorMessage * error)
@@ -36,8 +36,19 @@ namespace MoreJeeAPI
 				result = decode_json<ProductQueryDTO>(respond);
 			return successful;
 		}
+		bool ProductServer::GetById(const wstring& id, ProductIdentityQueryDTO & result, HttpErrorMessage * error)
+		{
+			HttpHeader header;
+			wstring respond;
+			bool successful = HttpGet(_sURI() + "/" + ws2s(id), header, respond);
+			if (successful)
+				result = decode_json<ProductIdentityQueryDTO>(respond);
+			return successful;
+		}
 	}
 }
 JSONCONS_MEMBER_TRAITS_DECL(MoreJeeAPI::MoreJee::ProductQuery, page, pageSize, search);
 JSONCONS_MEMBER_TRAITS_DECL(MoreJeeAPI::MoreJee::ProductListDTO, id, name, icon, description, categoryId, categoryName, brand, unit, price, partnerPrice, purchasePrice, maxPrice, minPrice, maxPartnerPrice, minPartnerPrice, maxPurchasePrice, minPurchasePrice);
 JSONCONS_MEMBER_TRAITS_DECL(MoreJeeAPI::MoreJee::ProductQueryDTO, total, data);
+JSONCONS_MEMBER_TRAITS_DECL(MoreJeeAPI::MoreJee::ProductIdentityQueryDTO, id, name, icon, description, categoryId, categoryName, brand, unit, price, partnerPrice, purchasePrice, maxPrice, minPrice, maxPartnerPrice, minPartnerPrice, maxPurchasePrice, minPurchasePrice, specifications);
+JSONCONS_MEMBER_TRAITS_DECL(MoreJeeAPI::MoreJee::ProductSpecListDTO, id, name, icon, description, price, partnerPrice, purchasePrice);

@@ -28,6 +28,7 @@ namespace MoreJeeAPI
 		void Init(const wstring& server);//³õÊ¼»¯Æô¶¯Æ÷
 		const wstring Token() { return _Token != nullptr ? _Token : L""; }
 		const wstring Server() { return _Server != nullptr ? _Server : L""; }
+		const wstring Version();
 		void _ResetToken(const wstring& token);
 	};
 
