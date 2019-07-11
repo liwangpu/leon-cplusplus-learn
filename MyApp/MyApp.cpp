@@ -82,8 +82,8 @@ int main()
 		FileQuery q{ 1,300 };
 		FileQueryDTO dto;
 		HttpErrorMessage err;
-		fileSrv.Query(q, dto, &err);
-		cout << i << endl;
+		bool successful = fileSrv.Query(q, dto, &err);
+		cout << i << "-" << successful << endl;
 	}
 
 

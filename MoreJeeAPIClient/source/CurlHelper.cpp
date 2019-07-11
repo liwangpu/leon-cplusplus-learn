@@ -33,11 +33,12 @@ namespace MoreJeeAPI
 
 			if (!query.empty())
 			{
-				auto nUri = uri + "?";
+				string nUri = uri + "?";
 				for (const auto& kv : query)
 				{
-					auto val = curl_easy_escape(curl, kv.second.c_str(), kv.second.length());
+					char* val = curl_easy_escape(curl, kv.second.c_str(), kv.second.length());
 					nUri += kv.first + "=" + val + "&";
+					if (val) curl_free(val);
 				}
 
 				curl_easy_setopt(curl, CURLOPT_URL, nUri.c_str());
@@ -53,7 +54,7 @@ namespace MoreJeeAPI
 			wstring _token = Startup::Instance().Token();
 			if (!_token.empty())
 				headers = curl_slist_append(headers, ws2s((L"Authorization:bearer " + _token)).c_str());
-
+			
 
 			curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
@@ -65,6 +66,7 @@ namespace MoreJeeAPI
 
 			/* Perform the request, res will get the return code */
 			res = curl_easy_perform(curl);
+			curl_slist_free_all(headers);
 			curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);//获取http 状态码 
 
 			if (res == CURLE_OK)
@@ -122,7 +124,7 @@ namespace MoreJeeAPI
 			res = curl_easy_perform(curl);
 
 			/* Check for errors */
-		
+
 			long response_code = 0;
 			curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);//获取http 状态码 
 
@@ -181,7 +183,7 @@ namespace MoreJeeAPI
 			res = curl_easy_perform(curl);
 
 			/* Check for errors */
-		
+
 			long response_code = 0;
 			curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);//获取http 状态码 
 
@@ -240,7 +242,7 @@ namespace MoreJeeAPI
 			res = curl_easy_perform(curl);
 
 			/* Check for errors */
-		
+
 			long response_code = 0;
 			curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);//获取http 状态码 
 
