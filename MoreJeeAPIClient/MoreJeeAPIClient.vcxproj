@@ -156,8 +156,10 @@
     <ClInclude Include="include\StringHelper.h" />
     <ClInclude Include="include\Basic\TokenServer.h" />
     <ClInclude Include="include\MoreJee\TextureServer.h" />
+    <ClInclude Include="include\MoreJee\ProductServer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\MoreJee\ProductServer.cpp" />
     <ClCompile Include="source\Basic\AccountServer.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="source\APIServer.cpp" />

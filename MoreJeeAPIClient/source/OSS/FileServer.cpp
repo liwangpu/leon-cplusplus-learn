@@ -24,7 +24,7 @@ namespace MoreJeeAPI
 			return _Instance;
 		}
 
-		void FileServer::Query(const FileQuery & query, FileQueryDTO & result)
+		bool FileServer::Query(const FileQuery & query, FileQueryDTO & result, HttpErrorMessage* error)
 		{
 			map<string, string > q;
 			q["page"] = to_string(query.page);
@@ -34,16 +34,20 @@ namespace MoreJeeAPI
 
 			HttpHeader header;
 			wstring respond;
-			HttpGet(_sURI(), q, header, respond);
-			result = decode_json<FileQueryDTO>(respond);
+			bool successful = HttpGet(_sURI(), q, header, respond);
+			if (successful)
+				result = decode_json<FileQueryDTO>(respond);
+			return successful;
 		}
 
-		void FileServer::GetById(const wstring & id, FileIdentityDTO & result)
+		bool FileServer::GetById(const wstring & id, FileIdentityDTO & result, HttpErrorMessage* error)
 		{
 			HttpHeader header;
 			wstring respond;
-			HttpGet(_sURI() + "/" + ws2s(id), header, respond);
-			result = decode_json<FileIdentityDTO>(respond);
+			bool successful = HttpGet(_sURI() + "/" + ws2s(id), header, respond);
+			if (successful)
+				result = decode_json<FileIdentityDTO>(respond);
+			return successful;
 		}
 
 	}

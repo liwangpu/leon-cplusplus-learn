@@ -39,6 +39,9 @@
     <ClInclude Include="include\MoreJee\TextureServer.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="include\MoreJee\ProductServer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -66,6 +69,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="source\MoreJee\TextureServer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="source\MoreJee\ProductServer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

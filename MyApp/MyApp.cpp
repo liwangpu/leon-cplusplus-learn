@@ -26,6 +26,7 @@
 #include "Basic/TokenServer.h"
 #include "Basic/AccountServer.h"
 #include "MoreJee/TextureServer.h"
+#include "MoreJee/ProductServer.h"
 
 using namespace std;
 using namespace MoreJeeAPI;
@@ -57,155 +58,82 @@ int main()
 	startup.Init(url);
 
 
-	TokenServer& tokenSrv = TokenServer::Instance();
-	AccountServer& accountSrv = AccountServer::Instance();
-	TextureServer& textureSrv = TextureServer::Instance();
+	TokenServer tokenSrv = TokenServer::Instance();
+	FileServer fileSrv = FileServer::Instance();
+	AccountServer accountSrv = AccountServer::Instance();
+	TextureServer textureSrv = TextureServer::Instance();
+	ProductServer productSrv = ProductServer::Instance();
 
-	TokenRequestCommand cmd;
-	cmd.username = L"taobao1@tao.com";
-	cmd.password = L"e10adc3949ba59abbe56e057f20f883e";
-
-	////请求Token
-	TokenRequestDTO tokenDto;
-	HttpErrorMessage requestTokenErr;
-	tokenSrv.RequestToken(cmd, tokenDto, &requestTokenErr);
-
-	////获取用户个人信息
-	//AccountProfileDTO profileDto;
-	//HttpErrorMessage profileErr;
-	//accountSrv.GetProfile(profileDto,&profileErr);
+	{
+		////请求Token
+		TokenRequestCommand cmd;
+		cmd.username = L"taobao1@tao.com";
+		cmd.password = L"e10adc3949ba59abbe56e057f20f883e";
+		TokenRequestDTO dto;
+		HttpErrorMessage err;
+		tokenSrv.RequestToken(cmd, dto, &err);
+	}
 
 
-	TextureQuery q{ 1,300 };
-	TextureQueryDTO textureQueryDto;
-	textureSrv.Query(q, textureQueryDto);
+	{
+		////获取用户个人信息
+		AccountProfileDTO dto;
+		HttpErrorMessage err;
+		accountSrv.GetProfile(dto, &err);
+	}
+
+	//{
+	//	////获取文件列表
+	//	FileQuery q{ 1,300 };
+	//	FileQueryDTO dto;
+	//	HttpErrorMessage err;
+	//	fileSrv.Query(q, dto, &err);
+	//}
+
+	//{
+	//	////获取单个文件
+	//	FileIdentityDTO dto;
+	//	HttpErrorMessage err;
+	//	fileSrv.GetById(L"9911d914f43a682f1aa16c2efc1ad0b4", dto, &err);
+	//}
+
+
+	//{
+	//	////获取贴图列表
+	//	TextureQuery q{ 1,300 };
+	//	TextureQueryDTO dto;
+	//	HttpErrorMessage err;
+	//	textureSrv.Query(q, dto, &err);
+	//}
+
+	//{
+	//	////获取单个贴图信息
+	//	TextureIdentityQueryDTO dto;
+	//	HttpErrorMessage err;
+	//	textureSrv.GetById(L"PNfmzjo3pgA8czB", dto, &err);
+	//}
+
+
+	{
+		////获取产品列表
+		ProductQuery q{ 1,300 };
+		ProductQueryDTO dto;
+		HttpErrorMessage err;
+		productSrv.Query(q, dto, &err);
+	}
+
+
+
+
+
+
+
+
+
 
 
 	int a = 1;
 	int g = getchar();
 
-
-	//OSS::FileServer & fileSrv = FileServer::Instance();
-
-	//FileQuery prm{ 1,3,L"测试" };
-
-	//FileQueryDTO result;
-	//fileSrv.Query(prm, result);
-
-
-	//FileIdentityDTO file;
-	//fileSrv.GetById(L"9911d914f43a682f1aa16c2efc1ad0b4", file);
-
-
-	//int a = 1;
-	//int g = getchar();
-
-
-	//char str[] = "%s => %d";
-	//cout << format("search=%s", "apples") << endl;
-
-
-
-	//wstring search = L"小明";
-
-	//wostringstream out;
-
-	//out << "search=" << search;
-
-	//wcout << out.str() << endl;
-
-
-
-	//int a = 1;
-	//int g = getchar();
-
-	//map<string, int> myMsg;
-
-	//myMsg["age"] = 18;
-	//myMsg["sum"] = 100;
-
-	//auto a = myMsg.find("age");
-
-	//for (auto it = myMsg.begin(); it != myMsg.end(); it++)
-	//{
-	//	wcout << it. << endl;
-	//}
-
-
-
-	//for (auto const& p : myMsg)
-	//{
-	//	cout << p.first << ' ' << p.second << '\n';
-	//}
-
-	//wcout << myMsg.find(1) << endl;
-
-
-
-
-
-
-	//wstring server = L"http://192.168.99.100:9503/";
-
-	//wchar_t * _Server1 = nullptr;
-	//wchar_t * _Server2 = nullptr;
-
-	//_Server1 = new wchar_t[server.size() + 1];
-	//wcscpy_s(_Server1, server.size() + 1, server.c_str());
-
-	//_Server2 = new wchar_t[server.size() + 1];
-	//wcscpy_s(_Server2, server.size() + 1, server.c_str());
-
-
-	//bool aa = *_Server1 == *_Server2;
-
-
-
-
-
-
-	//wcout << _Server1== _Server2 << endl;
-
-
-	//Book book;
-
-	//book.name = "水浒传";
-	//book.price = 18;
-
-
-
-	//PagingQueryDTO<PagingQuery> res;
-
-	//vector<PagingQuery> list;
-
-	//PagingQuery p1;
-	//p1.page = 12;
-	//p1.pageSize = 100;
-
-	//list.push_back(p1);
-
-
-	//wcout << startup.Server() << endl;
-
-
-
-	//ifstream fs;
-	//fs.open("persons.json");
-
-	//string str;
-	//char _c;
-	//while (fs.get(_c))
-	//	str += _c;
-	//cout << str << endl;
-
-	//Person p;
-	//mydecode_json<Person>(str, p);
-
-
-
-
-
-	//wcout << "finished!" << endl;
-	/*int g = getchar();*/
 }
 

@@ -53,8 +53,8 @@ namespace MoreJeeAPI
 			FileServer();
 		public:
 			static FileServer& Instance();
-			void Query(const FileQuery& query, FileQueryDTO& result);
-			void GetById(const wstring& id, FileIdentityDTO& result);
+			bool Query(const FileQuery& query, FileQueryDTO& result, HttpErrorMessage* error = nullptr);
+			bool GetById(const wstring& id, FileIdentityDTO& result, HttpErrorMessage* error = nullptr);
 		};
 	}
 }

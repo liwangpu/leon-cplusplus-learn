@@ -32,7 +32,10 @@ namespace MoreJeeAPI
 
 		struct TextureIdentityQueryDTO
 		{
-
+			wstring id;
+			wstring name;
+			wstring icon;
+			wstring dependencies;
 		};
 
 
@@ -43,6 +46,7 @@ namespace MoreJeeAPI
 		public:
 			static TextureServer& Instance();
 			bool Query(const TextureQuery& query, TextureQueryDTO& result, HttpErrorMessage* error = nullptr);
+			bool GetById(const wstring& id, TextureIdentityQueryDTO& result, HttpErrorMessage* error = nullptr);
 		};
 	}
 }

@@ -38,10 +38,17 @@ namespace MoreJeeAPI
 				result = decode_json<TextureQueryDTO>(respond);
 			return successful;
 		}
+		bool TextureServer::GetById(const wstring & id, TextureIdentityQueryDTO & result, HttpErrorMessage * error)
+		{
+			HttpHeader header;
+			wstring respond;
+			bool successful = HttpGet(_sURI() + "/" + ws2s(id), header, respond);
+			if (successful)
+				result = decode_json<TextureIdentityQueryDTO>(respond);
+			return successful;
+		}
 	}
 }
 JSONCONS_MEMBER_TRAITS_DECL(MoreJeeAPI::MoreJee::TextureListDTO, id, name);
 JSONCONS_MEMBER_TRAITS_DECL(MoreJeeAPI::MoreJee::TextureQueryDTO, total, data);
-//JSONCONS_MEMBER_TRAITS_DECL(MoreJeeAPI::OSS::FileIdentityDTO, id, name, url, fileExt, size, fileState);
-
-
+JSONCONS_MEMBER_TRAITS_DECL(MoreJeeAPI::MoreJee::TextureIdentityQueryDTO, id, name, icon, dependencies);
