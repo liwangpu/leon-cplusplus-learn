@@ -45,6 +45,29 @@ namespace MoreJeeAPI
 				result = decode_json<ProductIdentityQueryDTO>(respond);
 			return successful;
 		}
+		bool ProductServer::Create(const ProductCreateCommand & command, ProductIdentityQueryDTO & result, HttpErrorMessage * error)
+		{
+			wstring body;
+			encode_json(command, body);
+
+			HttpHeader header;
+			wstring response;
+			bool successful = HttpPost(_sURI(), header, ws2s(body), response, error);
+			if (successful)
+				result = decode_json<ProductIdentityQueryDTO>(response);
+			return successful;
+		}
+		bool ProductServer::Update(const wstring & id, const vector<HttpPatchData>& command, HttpErrorMessage * error)
+		{
+			wstring body;
+			body = L"[{\"op\":\"add\",\"path\":\"name\",\"value\":\"after patch name 01\"},{\"op\":\"add\",\"path\":\"/description\",\"value\":\"good\"}]";
+
+			HttpHeader header;
+			header.ContentType = "application/json-patch+json";
+			wstring response;
+			return HttpPatch(_sURI() + "/" + ws2s(id), header, ws2s(body), response, error);
+		}
+
 	}
 }
 JSONCONS_MEMBER_TRAITS_DECL(MoreJeeAPI::MoreJee::ProductQuery, page, pageSize, search);
@@ -52,3 +75,5 @@ JSONCONS_MEMBER_TRAITS_DECL(MoreJeeAPI::MoreJee::ProductListDTO, id, name, icon,
 JSONCONS_MEMBER_TRAITS_DECL(MoreJeeAPI::MoreJee::ProductQueryDTO, total, data);
 JSONCONS_MEMBER_TRAITS_DECL(MoreJeeAPI::MoreJee::ProductIdentityQueryDTO, id, name, icon, description, categoryId, categoryName, brand, unit, price, partnerPrice, purchasePrice, maxPrice, minPrice, maxPartnerPrice, minPartnerPrice, maxPurchasePrice, minPurchasePrice, specifications);
 JSONCONS_MEMBER_TRAITS_DECL(MoreJeeAPI::MoreJee::ProductSpecListDTO, id, name, icon, description, price, partnerPrice, purchasePrice);
+JSONCONS_MEMBER_TRAITS_DECL(MoreJeeAPI::MoreJee::ProductCreateCommand, name, icon, description, categoryId, brand, unit);
+

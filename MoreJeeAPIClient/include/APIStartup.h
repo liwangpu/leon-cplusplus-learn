@@ -8,7 +8,6 @@
 #endif
 
 
-
 namespace MoreJeeAPI
 {
 	using namespace std;

@@ -2,7 +2,6 @@
 #include <string>
 #include <vector>
 
-
 #ifdef MOREJEEAPICLIENT_EXPORTS
 #define MOREJEEAPICLIENT_API __declspec(dllexport)
 #else
@@ -15,11 +14,19 @@ namespace MoreJeeAPI
 
 	struct HttpErrorMessage
 	{
-		short statusCode = 0;
+		long statusCode = 0;
 		vector<wstring> messages;
 	};
 
-	class APIServer
+
+	struct HttpPatchData
+	{
+		wstring op;
+		wstring path;
+		wstring value;
+	};
+
+	class MOREJEEAPICLIENT_API APIServer
 	{
 	protected:
 		wchar_t* _URIwcptr = nullptr;

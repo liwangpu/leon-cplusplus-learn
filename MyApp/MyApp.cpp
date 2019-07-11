@@ -130,8 +130,31 @@ int main()
 	//}
 
 
+	//{
+	//	////创建一个产品
+	//	ProductCreateCommand cmd;
+	//	ProductIdentityQueryDTO dto;
+	//	HttpErrorMessage err;
+	//	cmd.name = L"测试产品1";
+	//	cmd.description = L"测试使用";
+	//	cmd.brand = L"竹烛";
+	//	cmd.unit = L"个";
+	//	productSrv.Create(cmd, dto, &err);
+	//}
 
+	{
+		////修改产品基本信息
+		HttpErrorMessage err;
+		ProductBasicInfoPatchCommand cmd;
+		cmd.name = L"测试产品11111";
+		cmd.description = L"测试使用11111";
+		cmd.brand = L"竹烛1111";
+		cmd.unit = L"个111";
 
+		auto aaa = cmd._GetPatchData();
+
+		productSrv.Update(L"NkfQ91KKOnPxi4", aaa, &err);
+	}
 
 
 
