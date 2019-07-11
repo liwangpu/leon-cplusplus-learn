@@ -47,8 +47,9 @@ namespace MoreJeeAPI
 			delete[] _Token;
 			_Token = nullptr;
 		}
-		_Token = new wchar_t[token.size() + 1];
-		wcscpy_s(_Token, token.size() + 1, token.c_str());
+		size_t size = token.size();
+		_Token = new wchar_t[size + 1];
+		wcscpy_s(_Token, size + 1, token.c_str());
 	}
 
 

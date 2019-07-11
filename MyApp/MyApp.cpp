@@ -38,19 +38,11 @@ using namespace MoreJeeAPI::MoreJee;
 
 
 
-//struct MyCommand
-//{
-//	wstring username;
-//	wstring password;
-//};
-//
-//JSONCONS_MEMBER_TRAITS_DECL(MyCommand, username, password);
-
 int main()
 {
 	//wcout.imbue(locale("chs"));
 
-	//wstm.imbue(locale("en_US.UTF-8"));
+
 
 	//wstring url = L"http://192.168.99.100:95031/";
 	wstring url = L"http://192.168.99.100:9503/";

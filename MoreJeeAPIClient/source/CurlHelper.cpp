@@ -1,4 +1,3 @@
-#include "curl/curl.h"
 #include "../thirdparty/jsoncons/json.hpp"
 #include "../include/CurlHelper.h"
 #include "../include/StringHelper.h"
@@ -33,15 +32,10 @@ namespace MoreJeeAPI
 
 			if (!query.empty())
 			{
-				string nUri = uri + "?";
-				for (const auto& kv : query)
-				{
-					char* val = curl_easy_escape(curl, kv.second.c_str(), kv.second.length());
-					nUri += kv.first + "=" + val + "&";
-					if (val) curl_free(val);
-				}
-
-				curl_easy_setopt(curl, CURLOPT_URL, nUri.c_str());
+				char* nuri = nullptr;
+				_ConcateURIAndQuery(uri, query, curl, nuri);
+				string mmm = nuri;
+				curl_easy_setopt(curl, CURLOPT_URL, nuri);
 			}
 			else
 				curl_easy_setopt(curl, CURLOPT_URL, uri.c_str());
@@ -54,7 +48,7 @@ namespace MoreJeeAPI
 			wstring _token = Startup::Instance().Token();
 			if (!_token.empty())
 				headers = curl_slist_append(headers, ws2s((L"Authorization:bearer " + _token)).c_str());
-			
+
 
 			curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
@@ -269,6 +263,31 @@ namespace MoreJeeAPI
 
 		curl_easy_cleanup(curl);
 		return bSuccessful;
+	}
+
+	void _ConcateURIAndQuery(const string & uri, const map<string, string>& query, CURL* handler, char* nui)
+	{
+		vector<string> urivec;
+		urivec.push_back(uri);
+		urivec.push_back("?");
+
+		for (const auto& kv : query)
+		{
+			char* val = curl_easy_escape(handler, kv.second.c_str(), kv.second.length());
+			urivec.push_back(kv.first);
+			urivec.push_back("=");
+			urivec.push_back(val);
+			urivec.push_back("&");
+			if (val) curl_free(val);
+		}
+		string str = appendstr(urivec);
+		if (nui != nullptr)
+		{
+			delete[] nui;
+			nui = nullptr;
+		}
+		nui = new char[str.size() + 1];
+		strcpy_s(nui, str.size() + 1, str.c_str());
 	}
 }
 JSONCONS_MEMBER_TRAITS_DECL(MoreJeeAPI::HttpErrorMessage, statusCode, messages);
