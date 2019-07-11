@@ -1,4 +1,5 @@
 #include <vector>
+#include "curl/curl.h"
 #include "../include/APIStartup.h"
 
 namespace MoreJeeAPI
@@ -15,6 +16,12 @@ namespace MoreJeeAPI
 
 	void Startup::Init(const wstring& server)
 	{
+		static bool CurlGlobalIsInit = false;
+		if (!CurlGlobalIsInit)
+		{
+			curl_global_init(CURL_GLOBAL_ALL);
+			CurlGlobalIsInit = true;
+		}
 		if (_Server != nullptr)
 		{
 			delete[] _Server;
@@ -22,7 +29,8 @@ namespace MoreJeeAPI
 		}
 		_Server = new wchar_t[server.size() + 1];
 		wcscpy_s(_Server, server.size() + 1, server.c_str());
-		setlocale(LC_ALL, ""); 
+		setlocale(LC_ALL, "");
+
 	}
 
 	const wstring Startup::Version()

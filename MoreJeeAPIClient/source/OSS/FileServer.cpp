@@ -26,7 +26,7 @@ namespace MoreJeeAPI
 
 		bool FileServer::Query(const FileQuery & query, FileQueryDTO & result, HttpErrorMessage* error)
 		{
-			map<string, string > q;
+			map<string, string> q;
 			q["page"] = to_string(query.page);
 			q["pageSize"] = to_string(query.pageSize);
 			q["search"] = ws2s(query.search);

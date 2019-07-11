@@ -5,6 +5,7 @@ namespace MoreJeeAPI
 {
 	namespace MoreJee
 	{
+		//产品分页查询参数
 		struct ProductQuery
 		{
 			short page;
@@ -12,6 +13,7 @@ namespace MoreJeeAPI
 			wstring search;
 		};
 
+		//产品分页返回的子参数
 		struct ProductListDTO
 		{
 			wstring id;
@@ -33,12 +35,14 @@ namespace MoreJeeAPI
 			float minPurchasePrice;
 		};
 
+		//产品分页返回的总参数
 		struct ProductQueryDTO
 		{
 			int total;
 			vector<ProductListDTO> data;
 		};
 
+		//产品单个资源请求返回的规格子参数
 		struct ProductSpecListDTO
 		{
 			wstring id;
@@ -50,6 +54,7 @@ namespace MoreJeeAPI
 			float purchasePrice;
 		};
 
+		//产品单个资源请求返回的总参数
 		struct ProductIdentityQueryDTO
 		{
 			wstring id;
@@ -72,6 +77,7 @@ namespace MoreJeeAPI
 			vector<ProductSpecListDTO> specifications;
 		};
 
+		//创建产品命令
 		struct ProductCreateCommand
 		{
 			wstring name;
@@ -82,6 +88,7 @@ namespace MoreJeeAPI
 			wstring unit;
 		};
 
+		//编辑产品基础信息命令
 		struct ProductBasicInfoPatchCommand
 		{
 			wstring name;
@@ -112,12 +119,12 @@ namespace MoreJeeAPI
 		private:
 			ProductServer();
 		public:
-			static ProductServer& Instance();
-			bool Query(const ProductQuery& query, ProductQueryDTO& result, HttpErrorMessage* error = nullptr);
-			bool GetById(const wstring& id, ProductIdentityQueryDTO& result, HttpErrorMessage* error = nullptr);
-			bool Create(const ProductCreateCommand& command, ProductIdentityQueryDTO& result, HttpErrorMessage* error = nullptr);
-			bool Update(const wstring& id, const vector<HttpPatchData>& command, HttpErrorMessage* error = nullptr);
-			bool Delete(const wstring& id, HttpErrorMessage* error = nullptr);
+			static ProductServer& Instance();//获取单实例服务
+			bool Query(const ProductQuery& query, ProductQueryDTO& result, HttpErrorMessage* error = nullptr);//分页查询请求
+			bool GetById(const wstring& id, ProductIdentityQueryDTO& result, HttpErrorMessage* error = nullptr);//单个资源查询请求
+			bool Create(const ProductCreateCommand& command, ProductIdentityQueryDTO& result, HttpErrorMessage* error = nullptr);//创建资源请求
+			bool Update(const wstring& id, const vector<HttpPatchData>& command, HttpErrorMessage* error = nullptr);//修改资源请求
+			bool Delete(const wstring& id, HttpErrorMessage* error = nullptr);//删除资源请求
 		};
 	}
 }

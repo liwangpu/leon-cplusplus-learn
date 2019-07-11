@@ -65,14 +65,25 @@ int main()
 	TextureServer& textureSrv = TextureServer::Instance();
 	ProductServer& productSrv = ProductServer::Instance();
 
+	//{
+	//	////请求Token
+	//	TokenRequestCommand cmd;
+	//	cmd.username = L"taobao1@tao.com";
+	//	cmd.password = L"e10adc3949ba59abbe56e057f20f883e";
+	//	TokenRequestDTO dto;
+	//	HttpErrorMessage err;
+	//	tokenSrv.RequestToken(cmd, dto, &err);
+	//}
+
+
+	for (size_t i = 0; i < 20000; i++)
 	{
-		////请求Token
-		TokenRequestCommand cmd;
-		cmd.username = L"taobao1@tao.com";
-		cmd.password = L"e10adc3949ba59abbe56e057f20f883e";
-		TokenRequestDTO dto;
+		////获取文件列表
+		FileQuery q{ 1,300 };
+		FileQueryDTO dto;
 		HttpErrorMessage err;
-		tokenSrv.RequestToken(cmd, dto, &err);
+		fileSrv.Query(q, dto, &err);
+		cout << i << endl;
 	}
 
 
@@ -156,11 +167,11 @@ int main()
 	//	productSrv.Update(L"NkfQ91KKOnPxi4", patchData, &err);
 	//}
 
-	{
-		////删除产品
-		HttpErrorMessage err;
-		productSrv.Delete(L"NkfQ91KKOnPxi4", &err);
-	}
+	//{
+	//	////删除产品
+	//	HttpErrorMessage err;
+	//	productSrv.Delete(L"NkfQ91KKOnPxi4", &err);
+	//}
 
 
 

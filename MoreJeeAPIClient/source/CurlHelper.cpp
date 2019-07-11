@@ -8,11 +8,10 @@ namespace MoreJeeAPI
 {
 	using namespace jsoncons;
 
-	//回调函数  得到响应内容
-	int write_data(char* buffer, size_t size, size_t nmemb, void* userp) {
-		std::string * str = dynamic_cast<std::string *>((std::string *)userp);
-		str->append((char *)buffer, size * nmemb);
-		return nmemb;
+	size_t write_data(void *ptr, size_t size, size_t nmemb, std::string* data)
+	{
+		data->append((char*)ptr, size * nmemb);
+		return size * nmemb;
 	}
 
 	bool HttpGet(const string& uri, const HttpHeader& header, wstring& response, HttpErrorMessage* error)
@@ -26,7 +25,7 @@ namespace MoreJeeAPI
 		//struct curl_slist *headers = NULL; /* init to NULL is important */
 		CURL *curl;
 		CURLcode res;
-
+		bool bSuccessful = false;
 		curl = curl_easy_init();
 		if (curl)
 		{
@@ -61,10 +60,8 @@ namespace MoreJeeAPI
 			curl_easy_setopt(curl, CURLOPT_WRITEDATA, &_response);
 
 			/* Check for errors */
-			bool bSuccessful = false;
+
 			long response_code = 0;
-
-
 
 			/* Perform the request, res will get the return code */
 			res = curl_easy_perform(curl);
@@ -87,19 +84,17 @@ namespace MoreJeeAPI
 
 			if (error)
 				error->statusCode = response_code;
-
-			/* always cleanup */
-			curl_easy_cleanup(curl);
-			return bSuccessful;
 		}
-		return false;
+
+		curl_easy_cleanup(curl);
+		return bSuccessful;
 	}
 
 	bool HttpPost(const string & uri, const HttpHeader & header, const string& body, wstring & response, HttpErrorMessage* error)
 	{
 		CURL *curl;
 		CURLcode res;
-
+		bool bSuccessful = false;
 		/* get a curl handle */
 		curl = curl_easy_init();
 		if (curl)
@@ -127,7 +122,7 @@ namespace MoreJeeAPI
 			res = curl_easy_perform(curl);
 
 			/* Check for errors */
-			bool bSuccessful = false;
+		
 			long response_code = 0;
 			curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);//获取http 状态码 
 
@@ -149,17 +144,16 @@ namespace MoreJeeAPI
 			if (error)
 				error->statusCode = response_code;
 
-			curl_easy_cleanup(curl);
-			return bSuccessful;
 		}
-		return false;
+		curl_easy_cleanup(curl);
+		return bSuccessful;
 	}
 
 	bool HttpPatch(const string & uri, const HttpHeader & header, const string & body, wstring & response, HttpErrorMessage * error)
 	{
 		CURL *curl;
 		CURLcode res;
-
+		bool bSuccessful = false;
 		/* get a curl handle */
 		curl = curl_easy_init();
 		if (curl)
@@ -187,7 +181,7 @@ namespace MoreJeeAPI
 			res = curl_easy_perform(curl);
 
 			/* Check for errors */
-			bool bSuccessful = false;
+		
 			long response_code = 0;
 			curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);//获取http 状态码 
 
@@ -212,18 +206,16 @@ namespace MoreJeeAPI
 
 			if (error)
 				error->statusCode = response_code;
-
-			curl_easy_cleanup(curl);
-			return bSuccessful;
 		}
-		return false;
+		curl_easy_cleanup(curl);
+		return bSuccessful;
 	}
 
 	bool HttpDelete(const string & uri, const HttpHeader & header, HttpErrorMessage * error)
 	{
 		CURL *curl;
 		CURLcode res;
-
+		bool bSuccessful = false;
 		/* get a curl handle */
 		curl = curl_easy_init();
 		if (curl)
@@ -238,7 +230,6 @@ namespace MoreJeeAPI
 
 			string _response;
 
-
 			curl_easy_setopt(curl, CURLOPT_URL, uri.c_str());
 			curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "Delete"); /* !!! */
 			curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
@@ -249,7 +240,7 @@ namespace MoreJeeAPI
 			res = curl_easy_perform(curl);
 
 			/* Check for errors */
-			bool bSuccessful = false;
+		
 			long response_code = 0;
 			curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);//获取http 状态码 
 
@@ -272,11 +263,10 @@ namespace MoreJeeAPI
 
 			if (error)
 				error->statusCode = response_code;
-
-			curl_easy_cleanup(curl);
-			return bSuccessful;
 		}
-		return false;
+
+		curl_easy_cleanup(curl);
+		return bSuccessful;
 	}
 }
 JSONCONS_MEMBER_TRAITS_DECL(MoreJeeAPI::HttpErrorMessage, statusCode, messages);
