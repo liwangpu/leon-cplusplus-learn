@@ -32,10 +32,9 @@ namespace MoreJeeAPI
 
 			if (!query.empty())
 			{
-				char* nuri = nullptr;
+				string nuri;
 				_ConcateURIAndQuery(uri, query, curl, nuri);
-				string mmm = nuri;
-				curl_easy_setopt(curl, CURLOPT_URL, nuri);
+				curl_easy_setopt(curl, CURLOPT_URL, nuri.c_str());
 			}
 			else
 				curl_easy_setopt(curl, CURLOPT_URL, uri.c_str());
@@ -45,9 +44,9 @@ namespace MoreJeeAPI
 			//curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
 			struct curl_slist *headers = NULL;
 			headers = curl_slist_append(headers, "Accept:application/json");
-			wstring _token = Startup::Instance().Token();
+			string _token = ws2s(Startup::Instance().Token());
 			if (!_token.empty())
-				headers = curl_slist_append(headers, ws2s((L"Authorization:bearer " + _token)).c_str());
+				headers = curl_slist_append(headers, appendstr("Authorization:bearer ", _token).c_str());
 
 
 			curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
@@ -81,7 +80,6 @@ namespace MoreJeeAPI
 			if (error)
 				error->statusCode = response_code;
 		}
-
 		curl_easy_cleanup(curl);
 		return bSuccessful;
 	}
@@ -97,11 +95,11 @@ namespace MoreJeeAPI
 		{
 			struct curl_slist *headers = NULL;
 			headers = curl_slist_append(headers, "Accept:application/json");
-			wstring _token = Startup::Instance().Token();
+			string _token = ws2s(Startup::Instance().Token());
 			if (!_token.empty())
-				headers = curl_slist_append(headers, ws2s((L"Authorization:bearer " + _token)).c_str());
+				headers = curl_slist_append(headers, appendstr("Authorization:bearer ", _token).c_str());
 			if (!header.ContentType.empty())
-				headers = curl_slist_append(headers, ("Content-Type:" + header.ContentType + ";charset=utf-8").c_str());
+				headers = curl_slist_append(headers, appendstr("Content-Type:", header.ContentType, ";charset=utf-8").c_str());
 
 			string _response;
 
@@ -116,7 +114,7 @@ namespace MoreJeeAPI
 
 			/* Perform the request, res will get the return code */
 			res = curl_easy_perform(curl);
-
+			curl_slist_free_all(headers);
 			/* Check for errors */
 
 			long response_code = 0;
@@ -156,11 +154,11 @@ namespace MoreJeeAPI
 		{
 			struct curl_slist *headers = NULL;
 			headers = curl_slist_append(headers, "Accept:application/json");
-			wstring _token = Startup::Instance().Token();
+			string _token = ws2s(Startup::Instance().Token());
 			if (!_token.empty())
-				headers = curl_slist_append(headers, ws2s((L"Authorization:bearer " + _token)).c_str());
+				headers = curl_slist_append(headers, appendstr("Authorization:bearer ", _token).c_str());
 			if (!header.ContentType.empty())
-				headers = curl_slist_append(headers, ("Content-Type:" + header.ContentType + ";charset=utf-8").c_str());
+				headers = curl_slist_append(headers, appendstr("Content-Type:", header.ContentType, ";charset=utf-8").c_str());
 
 			string _response;
 
@@ -175,7 +173,7 @@ namespace MoreJeeAPI
 
 			/* Perform the request, res will get the return code */
 			res = curl_easy_perform(curl);
-
+			curl_slist_free_all(headers);
 			/* Check for errors */
 
 			long response_code = 0;
@@ -218,11 +216,11 @@ namespace MoreJeeAPI
 		{
 			struct curl_slist *headers = NULL;
 			headers = curl_slist_append(headers, "Accept:application/json");
-			wstring _token = Startup::Instance().Token();
+			string _token = ws2s(Startup::Instance().Token());
 			if (!_token.empty())
-				headers = curl_slist_append(headers, ws2s((L"Authorization:bearer " + _token)).c_str());
+				headers = curl_slist_append(headers, appendstr("Authorization:bearer ", _token).c_str());
 			if (!header.ContentType.empty())
-				headers = curl_slist_append(headers, ("Content-Type:" + header.ContentType + ";charset=utf-8").c_str());
+				headers = curl_slist_append(headers, appendstr("Content-Type:", header.ContentType, ";charset=utf-8").c_str());
 
 			string _response;
 
@@ -234,7 +232,7 @@ namespace MoreJeeAPI
 
 			/* Perform the request, res will get the return code */
 			res = curl_easy_perform(curl);
-
+			curl_slist_free_all(headers);
 			/* Check for errors */
 
 			long response_code = 0;
@@ -260,12 +258,11 @@ namespace MoreJeeAPI
 			if (error)
 				error->statusCode = response_code;
 		}
-
 		curl_easy_cleanup(curl);
 		return bSuccessful;
 	}
 
-	void _ConcateURIAndQuery(const string & uri, const map<string, string>& query, CURL* handler, char* nui)
+	void _ConcateURIAndQuery(const string & uri, const map<string, string>& query, CURL* handler, string& nuri)
 	{
 		vector<string> urivec;
 		urivec.push_back(uri);
@@ -280,14 +277,7 @@ namespace MoreJeeAPI
 			urivec.push_back("&");
 			if (val) curl_free(val);
 		}
-		string str = appendstr(urivec);
-		if (nui != nullptr)
-		{
-			delete[] nui;
-			nui = nullptr;
-		}
-		nui = new char[str.size() + 1];
-		strcpy_s(nui, str.size() + 1, str.c_str());
+		nuri = appendstr(urivec);
 	}
 }
 JSONCONS_MEMBER_TRAITS_DECL(MoreJeeAPI::HttpErrorMessage, statusCode, messages);

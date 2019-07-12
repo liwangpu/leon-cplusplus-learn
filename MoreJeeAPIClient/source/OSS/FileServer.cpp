@@ -35,8 +35,8 @@ namespace MoreJeeAPI
 			HttpHeader header;
 			wstring respond;
 			bool successful = HttpGet(_sURI(), q, header, respond);
-		/*	if (successful)
-				result = decode_json<FileQueryDTO>(respond);*/
+			//if (successful)
+			//	result = decode_json<FileQueryDTO>(respond);
 			return successful;
 		}
 
@@ -44,7 +44,7 @@ namespace MoreJeeAPI
 		{
 			HttpHeader header;
 			wstring respond;
-			bool successful = HttpGet(_sURI() + "/" + ws2s(id), header, respond);
+			bool successful = HttpGet(appendstr(_sURI(), "/", ws2s(id)), header, respond);
 			if (successful)
 				result = decode_json<FileIdentityDTO>(respond);
 			return successful;

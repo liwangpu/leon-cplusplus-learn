@@ -138,7 +138,7 @@ int main()
 	//	ProductCreateCommand cmd;
 	//	ProductIdentityQueryDTO dto;
 	//	HttpErrorMessage err;
-	//	cmd.name = L"测试产品1";
+	//	cmd.name = L"测试产品2";
 	//	cmd.description = L"测试使用";
 	//	cmd.brand = L"竹烛";
 	//	cmd.unit = L"个";
@@ -149,8 +149,8 @@ int main()
 	//	////修改产品基本信息
 	//	HttpErrorMessage err;
 	//	ProductBasicInfoPatchCommand cmd;
-	//	cmd.name = L"测试产品11111";
-	//	cmd.description = L"测试使用11111";
+	//	cmd.name = L"测试产品22222";
+	//	cmd.description = L"测试使用222";
 	//	cmd.brand = L"竹烛1111";
 	//	cmd.unit = L"个111";
 

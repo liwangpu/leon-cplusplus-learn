@@ -23,6 +23,6 @@ namespace MoreJeeAPI
 	bool HttpPost(const string& uri, const HttpHeader& header, const string& body, wstring& response, HttpErrorMessage* error = nullptr);
 	bool HttpPatch(const string& uri, const HttpHeader& header, const string& body, wstring& response, HttpErrorMessage* error = nullptr);
 	bool HttpDelete(const string& uri, const HttpHeader& header, HttpErrorMessage* error = nullptr);
-	void _ConcateURIAndQuery(const string& uri, const map<string, string>& query, CURL* handler, char* nui);
+	void _ConcateURIAndQuery(const string& uri, const map<string, string>& query, CURL* handler, string& nuri);
 
 }
