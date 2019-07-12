@@ -44,6 +44,7 @@ namespace MoreJeeAPI
 		{
 		private:
 			FileServer();
+			FileServer(const FileServer& s);
 		public:
 			static FileServer& Instance();
 			bool Query(const FileQuery& query, FileQueryDTO& result, HttpErrorMessage* error = nullptr);

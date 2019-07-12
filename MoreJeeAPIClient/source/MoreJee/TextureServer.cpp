@@ -16,6 +16,10 @@ namespace MoreJeeAPI
 		{
 		}
 
+		TextureServer::TextureServer(const TextureServer & s)
+		{
+		}
+
 		TextureServer & TextureServer::Instance()
 		{
 			static TextureServer _Instance;

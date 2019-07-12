@@ -15,6 +15,10 @@ namespace MoreJeeAPI
 		{
 		}
 
+		ProductServer::ProductServer(const ProductServer & s)
+		{
+		}
+
 		ProductServer& ProductServer::Instance()
 		{
 			static ProductServer _Instance;

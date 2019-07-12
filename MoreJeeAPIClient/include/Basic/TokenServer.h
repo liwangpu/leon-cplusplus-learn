@@ -25,6 +25,7 @@ namespace MoreJeeAPI
 		{
 		private:
 			TokenServer();
+			TokenServer(const TokenServer& s);
 		public:
 			static TokenServer& Instance();
 			bool RequestToken(const TokenRequestCommand& command, TokenRequestDTO& result, HttpErrorMessage* error = nullptr);

@@ -13,6 +13,9 @@ namespace MoreJeeAPI
 		AccountServer::AccountServer()
 		{
 		}
+		AccountServer::AccountServer(const AccountServer & s)
+		{
+		}
 		AccountServer & AccountServer::Instance()
 		{
 			static AccountServer _Instance;

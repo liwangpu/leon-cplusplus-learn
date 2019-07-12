@@ -37,6 +37,7 @@ namespace MoreJeeAPI
 		{
 		private:
 			TextureServer();
+			TextureServer(const TextureServer& s);
 		public:
 			static TextureServer& Instance();
 			bool Query(const TextureQuery& query, TextureQueryDTO& result, HttpErrorMessage* error = nullptr);

@@ -18,6 +18,7 @@ namespace MoreJeeAPI
 		{
 		private:
 			AccountServer();
+			AccountServer(const AccountServer& s);
 		public:
 			static AccountServer& Instance();
 			bool GetProfile(AccountProfileDTO& result, HttpErrorMessage* error = nullptr);

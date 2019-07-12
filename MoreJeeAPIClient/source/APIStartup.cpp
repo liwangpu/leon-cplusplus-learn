@@ -8,6 +8,10 @@ namespace MoreJeeAPI
 	{
 	}
 
+	Startup::Startup(const Startup & s)
+	{
+	}
+
 	Startup & Startup::Instance()
 	{
 		static Startup _Instance;

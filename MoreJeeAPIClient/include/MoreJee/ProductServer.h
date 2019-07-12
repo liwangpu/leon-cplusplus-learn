@@ -118,6 +118,7 @@ namespace MoreJeeAPI
 		{
 		private:
 			ProductServer();
+			ProductServer(const ProductServer& s);
 		public:
 			static ProductServer& Instance();//获取单实例服务
 			bool Query(const ProductQuery& query, ProductQueryDTO& result, HttpErrorMessage* error = nullptr);//分页查询请求

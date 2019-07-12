@@ -17,6 +17,10 @@ namespace MoreJeeAPI
 		{
 		}
 
+		FileServer::FileServer(const FileServer & s)
+		{
+		}
+
 		FileServer & FileServer::Instance()
 		{
 			static FileServer _Instance;

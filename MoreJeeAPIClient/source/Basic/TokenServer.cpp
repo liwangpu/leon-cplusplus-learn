@@ -15,6 +15,10 @@ namespace MoreJeeAPI
 		{
 		}
 
+		TokenServer::TokenServer(const TokenServer & s)
+		{
+		}
+
 		TokenServer & TokenServer::Instance()
 		{
 			static TokenServer _Instance;

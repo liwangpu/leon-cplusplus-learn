@@ -21,7 +21,7 @@ namespace MoreJeeAPI
 		wchar_t* _Server = nullptr;
 		wchar_t* _Token = nullptr;
 		Startup();
-
+		Startup(const Startup& s);
 	public:
 		static Startup& Instance();//获取启动器实例
 		void Init(const wstring& server);//初始化启动器
