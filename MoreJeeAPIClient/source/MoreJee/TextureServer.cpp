@@ -1,8 +1,8 @@
 #include "../../include/MoreJee/TextureServer.h"
 #include "../thirdparty/jsoncons/json.hpp"
 #include "../../include/APIStartup.h"
-#include "../../include/CurlHelper.h"
-#include "../../include/StringHelper.h"
+#include "../../self/CurlHelper.h"
+#include "../../self/StringHelper.h"
 
 
 

@@ -139,6 +139,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;MOREJEEAPICLIENT_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>.\thirdparty</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -149,11 +150,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\Basic\AccountServer.h" />
-    <ClInclude Include="include\APIServer.h" />
+    <ClInclude Include="include\_APIServer.h" />
     <ClInclude Include="include\APIStartup.h" />
-    <ClInclude Include="include\CurlHelper.h" />
+    <ClInclude Include="self\CurlHelper.h" />
     <ClInclude Include="include\OSS\FileServer.h" />
-    <ClInclude Include="include\StringHelper.h" />
+    <ClInclude Include="self\StringHelper.h" />
     <ClInclude Include="include\Basic\TokenServer.h" />
     <ClInclude Include="include\MoreJee\TextureServer.h" />
     <ClInclude Include="include\MoreJee\ProductServer.h" />

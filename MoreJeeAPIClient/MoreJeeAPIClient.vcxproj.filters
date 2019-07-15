@@ -21,16 +21,7 @@
     <ClInclude Include="include\APIStartup.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="include\CurlHelper.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\StringHelper.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="include\Basic\TokenServer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\APIServer.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="include\Basic\AccountServer.h">
@@ -40,6 +31,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="include\MoreJee\ProductServer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="self\StringHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="self\CurlHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\_APIServer.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

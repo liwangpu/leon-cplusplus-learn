@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include "curl/curl.h"
-#include "./APIServer.h"
+#include "../include/_APIServer.h"
 
 namespace MoreJeeAPI
 {

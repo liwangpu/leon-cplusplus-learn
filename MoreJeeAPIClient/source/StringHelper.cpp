@@ -1,7 +1,7 @@
 #include <codecvt>
 #include <sstream>
 #include <string>
-#include "../include/StringHelper.h"
+#include "../self/StringHelper.h"
 
 
 namespace MoreJeeAPI

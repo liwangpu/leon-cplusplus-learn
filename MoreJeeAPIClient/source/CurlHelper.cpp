@@ -1,6 +1,6 @@
 #include "../thirdparty/jsoncons/json.hpp"
-#include "../include/CurlHelper.h"
-#include "../include/StringHelper.h"
+#include "../self/CurlHelper.h"
+#include "../self/StringHelper.h"
 #include "../include/APIStartup.h"
 
 namespace MoreJeeAPI

@@ -1,8 +1,8 @@
 #include "../../include/Basic/AccountServer.h"
 #include "../../include/APIStartup.h"
 #include "../thirdparty/jsoncons/json.hpp"
-#include "../../include/CurlHelper.h"
-#include "../../include/StringHelper.h"
+#include "../../self/CurlHelper.h"
+#include "../../self/StringHelper.h"
 
 namespace MoreJeeAPI
 {

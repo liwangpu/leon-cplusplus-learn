@@ -1,6 +1,6 @@
-#include "../include/APIServer.h"
+#include "../include/_APIServer.h"
 #include "../thirdparty/jsoncons/json.hpp"
-#include "../include/StringHelper.h"
+#include "../self/StringHelper.h"
 
 namespace MoreJeeAPI
 {
