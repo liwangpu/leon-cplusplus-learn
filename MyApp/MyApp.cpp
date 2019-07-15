@@ -57,15 +57,15 @@ int main()
 	TextureServer& textureSrv = TextureServer::Instance();
 	ProductServer& productSrv = ProductServer::Instance();
 
-	//{
-	//	////请求Token
-	//	TokenRequestCommand cmd;
-	//	cmd.username = L"taobao1@tao.com";
-	//	cmd.password = L"e10adc3949ba59abbe56e057f20f883e";
-	//	TokenRequestDTO dto;
-	//	HttpErrorMessage err;
-	//	tokenSrv.RequestToken(cmd, dto, &err);
-	//}
+	{
+		////请求Token
+		TokenRequestCommand cmd;
+		cmd.username = L"taobao1@tao.com";
+		cmd.password = L"e10adc3949ba59abbe56e057f20f883e";
+		TokenRequestDTO dto;
+		HttpErrorMessage err;
+		tokenSrv.RequestToken(cmd, dto, &err);
+	}
 
 
 	for (size_t i = 0; i < 20000; i++)

@@ -33,7 +33,7 @@ namespace MoreJeeAPI
 		};
 
 
-		class MOREJEEAPICLIENT_API TextureServer :protected APIServer
+		class MOREJEEAPICLIENT_API TextureServer :protected _APIServer
 		{
 		private:
 			TextureServer();

@@ -114,7 +114,7 @@ namespace MoreJeeAPI
 			}
 		};
 
-		class MOREJEEAPICLIENT_API ProductServer :protected APIServer
+		class MOREJEEAPICLIENT_API ProductServer :protected _APIServer
 		{
 		private:
 			ProductServer();

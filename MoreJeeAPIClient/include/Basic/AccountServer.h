@@ -14,7 +14,7 @@ namespace MoreJeeAPI
 			wstring organizationId;
 		};
 
-		class MOREJEEAPICLIENT_API AccountServer :protected APIServer
+		class MOREJEEAPICLIENT_API AccountServer :protected _APIServer
 		{
 		private:
 			AccountServer();

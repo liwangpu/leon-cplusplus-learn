@@ -27,7 +27,7 @@ namespace MoreJeeAPI
 		wstring value;
 	};
 
-	class MOREJEEAPICLIENT_API APIServer
+	class MOREJEEAPICLIENT_API _APIServer
 	{
 	protected:
 		wchar_t* _URIwcptr = nullptr;

@@ -21,7 +21,7 @@ namespace MoreJeeAPI
 			wstring expires;
 		};
 
-		class MOREJEEAPICLIENT_API TokenServer :protected APIServer
+		class MOREJEEAPICLIENT_API TokenServer :protected _APIServer
 		{
 		private:
 			TokenServer();

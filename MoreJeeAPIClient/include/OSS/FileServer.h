@@ -40,7 +40,7 @@ namespace MoreJeeAPI
 			short int fileState;
 		};
 
-		class MOREJEEAPICLIENT_API FileServer :protected APIServer
+		class MOREJEEAPICLIENT_API FileServer :protected _APIServer
 		{
 		private:
 			FileServer();

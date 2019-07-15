@@ -4,7 +4,7 @@
 
 namespace MoreJeeAPI
 {
-	void APIServer::_ResetRUI(const wstring& server, const wstring& resource)
+	void _APIServer::_ResetRUI(const wstring& server, const wstring& resource)
 	{
 		static wstring lastServer;
 		bool bServerChange = lastServer != server;
@@ -22,7 +22,7 @@ namespace MoreJeeAPI
 		}
 
 	}
-	string APIServer::_sURI()
+	string _APIServer::_sURI()
 	{
 		wstring wstr = _URIwcptr;
 		return ws2s(wstr);
